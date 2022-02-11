@@ -16,7 +16,7 @@ def index(request):
 
 def counter(request, value):
     rules = EDHARules.objects.get(pk=value)
-    return render(request, 'portfolio-details.html', {'rules': rules})
+    return render(request, 'rule-details.html', {'rules': rules})
 
 
 def jumptosection(request, val):
