@@ -53,8 +53,13 @@
           <div class="icon-box">
             <div class="icon"><i class="ri-stack-line"></i> <a href="{% url 'counter' value=rule.id %}">RULE {{ rule.id }}</a></div>
             <h4 class="title"><a href="{% url 'counter' value=rule.id %}">{{ rule.rule_subsection_title }}</a></h4>
-            <p class="description">{{ rule.rule_details|truncatechars:200 }}</p>
-
+            <p class="description">{{ rule.rule_details|safe|truncatechars:200 }}</p>
+            {% if rule.rule_details != rule.rule_details|safe|truncatechars:200 %}
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal{{ rule.pk }}">
+              <em>...read more</em>
+            </button>
+            {% endif %}
           </div>
         </div>
         {% endfor %}
@@ -65,6 +70,26 @@
 
   <main id="main">
 
+
+        <!-- Modal -->
+            {% for rule in rules %}
+              <div class="modal fade" id="exampleModal{{ rule.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ rule.pk }}" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel{{ rule.pk }}">{{ rule.rule_subsection_title }}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      {{ rule.rule_details|safe }}
+                    </div>
+                    <div class="modal-footer">
+                      <em>Rule {{ rule.id}} of the Rules of the Edo State House of Assembly</em>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
     <!-- ======= About Section =======
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">

@@ -50,8 +50,8 @@
         <div class="row gy-4">
           <div class="col-lg-8">
             <div class="portfolio-details-slider swiper">
-              <div class="swiper-wrapper align-items-center">
-                {{ rules.rule_details }}
+              <div class="align-items-center">
+                {{ rules.rule_details|safe }}
               </div>
               <div class="swiper-pagination"></div>
             </div>
