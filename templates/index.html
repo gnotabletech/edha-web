@@ -51,8 +51,8 @@
       {% for rule in rules %}
         <div class="col-md-6 col-lg-3 align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
           <div class="icon-box">
-            <div class="icon"><i class="ri-stack-line"></i> <a href="{% url 'counter' value=rule.id %}">RULE {{ rule.id }}</a></div>
-            <h4 class="title"><a href="{% url 'counter' value=rule.id %}">{{ rule.rule_subsection_title }}</a></h4>
+            <div class="icon"><i class="ri-stack-line"></i> <a href="{% url 'counter' value=rule.id %}">RULE {{ rule.rule_section_num }}<br><p class="title"><i class="ri-command-line"></i><em>Paragraph {{ rule.rule_subsection_num }}</em></p></a></div>
+            <h4 class="title"><a href="{% url 'counter' value=rule.id %}">{{ rule.rule_subsection_title }} (Paragraph {{ rule.rule_subsection_num}})</a></h4>
             <p class="description">{{ rule.rule_details|safe|truncatechars:200 }}</p>
             {% if rule.rule_details != rule.rule_details|safe|truncatechars:200 %}
             <!-- Button trigger modal -->
@@ -77,14 +77,14 @@
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel{{ rule.pk }}">{{ rule.rule_subsection_title }}</h5>
+                      <h5 class="modal-title" id="exampleModalLabel{{ rule.pk }}">{{ rule.rule_subsection_title }} (Paragraph {{ rule.rule_subsection_num }})</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                       {{ rule.rule_details|safe }}
                     </div>
                     <div class="modal-footer">
-                      <em>Rule {{ rule.id}} of the Rules of the Edo State House of Assembly</em>
+                      <em>Rule {{ rule.rule_section_num}} of the Rules of the Edo State House of Assembly</em>
                     </div>
                   </div>
                 </div>
@@ -137,16 +137,16 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+          <!--<div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
               <span data-purecounter-start="0" data-purecounter-end="{{ subsections_count }}" data-purecounter-duration="1" class="purecounter"></span>
               <p>Sub Sections</p>
             </div>
-          </div>
+          </div>-->
 
           <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
-              <span data-purecounter-start="0" data-purecounter-end="{{ rules_count }}" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="{{ subsections_count }}" data-purecounter-duration="1" class="purecounter"></span>
               <p>Rules</p>
             </div>
           </div>
