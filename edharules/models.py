@@ -5,9 +5,9 @@ from django.db import models
 class EDHARule(models.Model):
     rule_section_num = models.IntegerField(default=1)
     rule_section_title = models.CharField(max_length=255)
-    rule_subsection_num = models.CharField(max_length=2)
+    rule_subsection_num = models.IntegerField(default=1)
     rule_subsection_title = models.CharField(max_length=255)
-    rule_details = models.CharField(max_length=3000)
+    rule_details = models.TextField()
 
     def __str__(self):
         return self.rule_subsection_title
