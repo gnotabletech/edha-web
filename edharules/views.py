@@ -33,7 +33,7 @@ def jumptosection(request, val):
 
 def search(request):
     value = request.POST.get('info')
-    rules = EDHARule.objects.filter(rule_details__icontains=value)
+    rules = EDHARule.objects.filter(rule_details__icontains=value).order_by('rule_subsection_title')
     sections = EDHARule.objects.all().values('rule_subsection_title').distinct()
     rules_count = EDHARule.objects.filter(rule_details__icontains=value).count()
     sections_count = EDHARule.objects.filter(rule_details__icontains=value).values(
