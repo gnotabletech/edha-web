@@ -6,11 +6,16 @@ from .models import EDHARule
 # Create your views here.
 def index(request):
     rules = EDHARule.objects.all()
-    sections = EDHARule.objects.all().values('rule_subsection_title').distinct()
+    sections = EDHARule.objects.all().values('rule_subsection_title', 'rule_section_num').distinct()
+    section_list = []
+    for section in sections:
+        if section not in section_list:
+            section_list.append(section)
+
     rules_count = EDHARule.objects.all().count()
-    sections_count = EDHARule.objects.values('rule_section_title').distinct().count()
-    subsections_count = EDHARule.objects.values('rule_subsection_title').distinct().count()
-    return render(request, 'index.html', {'rules': rules, 'sections': sections, 'rules_count': rules_count,
+    sections_count = EDHARule.objects.values('rule_subsection_num').distinct().count()
+    subsections_count = EDHARule.objects.values('rule_section_num').distinct().count()
+    return render(request, 'index.html', {'rules': rules, 'sections': section_list, 'rules_count': rules_count,
                                           'sections_count': sections_count, 'subsections_count': subsections_count})
 
 
