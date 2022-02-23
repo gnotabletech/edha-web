@@ -3,7 +3,7 @@
 {% block body %}
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
+<header id="header" class="fixed-top" xmlns="http://www.w3.org/1999/html">
     <div class="container d-flex align-items-center justify-content-between">
 
       <!-- Uncomment below if you prefer to use an image logo -->
@@ -19,7 +19,7 @@
             </form>
           </li>
           <li><a class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
-          <li class="dropdown"><a href="#"><span>Jump to Sections</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="#"><span>Sections</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               {% for section in sections %}
               <li><a class="nav-link scrollto active" href="{% url 'jump_to_section' section.rule_subsection_title %}">{{ section.rule_subsection_title }}</a></li>
@@ -50,6 +50,9 @@
        <!-- ======= Counts Section ======= -->
     <section id="counts" class="counts section-bg">
       <div class="container">
+        <div class="text-center">
+          <p><h5><em>Version approved in July 2019 <br>this version contains</em></h5>
+        </div>
         <div class="row justify-content-center">
           <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
@@ -94,7 +97,6 @@
   </section><!-- End Hero -->
 
   <main id="main">
-
 
         <!-- Modal -->
             {% for rule in rules %}
