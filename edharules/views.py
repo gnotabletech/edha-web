@@ -26,13 +26,17 @@ def counter(request, value):
 
 def jumptosection(request, val):
     sections = EDHARule.objects.all().values('rule_subsection_title').distinct()
+    section_list = []
+    for section in sections:
+        if section not in section_list:
+            section_list.append(section)
     rules = EDHARule.objects.filter(rule_subsection_title=val)
     rules_count = EDHARule.objects.filter(rule_subsection_title=val).count()
     sections_count = EDHARule.objects.filter(rule_subsection_title=val).values(
         'rule_section_title').distinct().count()
     subsections_count = EDHARule.objects.filter(rule_subsection_title=val).values(
         'rule_subsection_title').distinct().count()
-    return render(request, 'index.html', {'rules': rules, 'sections': sections, 'rules_count': rules_count,
+    return render(request, 'index.html', {'rules': rules, 'sections': section_list, 'rules_count': rules_count,
                                           'sections_count': sections_count, 'subsections_count': subsections_count})
 
 
@@ -40,10 +44,14 @@ def search(request):
     value = request.POST.get('info')
     rules = EDHARule.objects.filter(rule_details__icontains=value).order_by('rule_subsection_title')
     sections = EDHARule.objects.all().values('rule_subsection_title').distinct()
+    section_list = []
+    for section in sections:
+        if section not in section_list:
+            section_list.append(section)
     rules_count = EDHARule.objects.filter(rule_details__icontains=value).count()
     sections_count = EDHARule.objects.filter(rule_details__icontains=value).values(
         'rule_section_title').distinct().count()
     subsections_count = EDHARule.objects.filter(rule_details__icontains=value).values(
         'rule_subsection_title').distinct().count()
-    return render(request, 'index.html', {'rules': rules, 'sections': sections, 'rules_count': rules_count,
+    return render(request, 'index.html', {'rules': rules, 'sections': section_list, 'rules_count': rules_count,
                                           'sections_count': sections_count, 'subsections_count': subsections_count})
