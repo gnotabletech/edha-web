@@ -21,12 +21,15 @@
               {% endfor %}
             </ul>
           </li>
-        </ul>
-
+         <li>
             <form action="search" method="post" class="d-flex scrollto active">
               {% csrf_token %}
               <input type="text" name="info" class="form-control" placeholder="search topic"><input type="submit" class="btn btn-md btn-primary btn-block" value="Search">
             </form>
+          </li>
+        </ul>
+
+
 
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
