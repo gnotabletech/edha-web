@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.conf.global_settings import DATABASES
@@ -77,7 +76,12 @@ WSGI_APPLICATION = 'edharulesandbiz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES['default'] = dj_database_url.config(default='postgres://djdgkzbngwjkhv:834cd294190c45b90b1a1e6c53c9ce31aa1869ad99b8870f3d1c636e9a6191f4@ec2-3-219-204-29.compute-1.amazonaws.com:5432/d3skcacqte69e2')
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
