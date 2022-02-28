@@ -10,14 +10,14 @@ from .models import BillsAndLaws, AdminInfo
 def laws_repo(request):
     user = AdminInfo.objects.all().get(username='notaigbe')
     laws = BillsAndLaws.objects.all().order_by('assent_date')
-    return render(request, 'laws/userhome.html', {'user': user, 'laws': laws})
+    return render(request, 'lawsrepo/userhome.html', {'user': user, 'laws': laws})
 
 
 def getlaw(request):
     value = request.POST.get('inputTitle')
     user = AdminInfo.objects.get(username='notaigbe')
     laws = BillsAndLaws.objects.filter(short_title__icontains=value).order_by('assent_date')
-    return render(request, 'laws/userhome.html', {'laws': laws, 'user': user})
+    return render(request, 'lawsrepo/userhome.html', {'laws': laws, 'user': user})
 
 
 def display_law(request, value):
