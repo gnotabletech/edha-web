@@ -22,5 +22,6 @@ def getlaw(request):
 
 
 def display_law(request, value):
-    filepath = os.path.join('static', 'assets/laws/' + value.strip() + '.pdf')
-    return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
+    if value != '':
+        filepath = os.path.join('static', 'assets/laws/' + value.strip() + '.pdf')
+        return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
