@@ -3,7 +3,6 @@ import os
 from django.http import FileResponse
 from django.shortcuts import render
 
-from edharulesandbiz.settings import BASE_DIR
 from .models import BillsAndLaws, AdminInfo
 
 

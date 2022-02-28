@@ -15,13 +15,13 @@ def index(request):
     rules_count = EDHARule.objects.all().count()
     sections_count = EDHARule.objects.values('rule_subsection_num').distinct().count()
     subsections_count = EDHARule.objects.values('rule_section_num').distinct().count()
-    return render(request, 'index.html', {'rules': rules, 'sections': section_list, 'rules_count': rules_count,
+    return render(request, 'edharules/index.html', {'rules': rules, 'sections': section_list, 'rules_count': rules_count,
                                           'sections_count': sections_count, 'subsections_count': subsections_count})
 
 
 def counter(request, value):
     rules = EDHARule.objects.get(pk=value)
-    return render(request, 'rule-details.html', {'rules': rules})
+    return render(request, 'edharules/rule-details.html', {'rules': rules})
 
 
 def jumptosection(request, val):
@@ -36,7 +36,7 @@ def jumptosection(request, val):
         'rule_section_num').distinct().count()
     subsections_count = EDHARule.objects.filter(rule_subsection_title=val).values(
         'rule_subsection_num').distinct().count()
-    return render(request, 'index.html', {'rules': rules, 'sections': section_list, 'rules_count': rules_count,
+    return render(request, 'edharules/index.html', {'rules': rules, 'sections': section_list, 'rules_count': rules_count,
                                           'sections_count': sections_count, 'subsections_count': subsections_count})
 
 
@@ -53,5 +53,5 @@ def search(request):
         'rule_section_num').distinct().count()
     subsections_count = EDHARule.objects.filter(rule_details__icontains=value).values(
         'rule_subsection_num').distinct().count()
-    return render(request, 'index.html', {'rules': rules, 'sections': section_list, 'rules_count': rules_count,
+    return render(request, 'edharules/index.html', {'rules': rules, 'sections': section_list, 'rules_count': rules_count,
                                           'sections_count': sections_count, 'subsections_count': subsections_count})
