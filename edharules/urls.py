@@ -7,5 +7,5 @@ urlpatterns = [
     path('index', views.index, name='index'),
     path('search', views.search, name='search'),
     path('counter/<value>', views.counter, name='counter'),
-    path('jumptosection/<path:val>', views.jumptosection, name='jump_to_section')
+    path('jumptosection/<path:val>', views.jumptosection, name='jump_to_section'),
 ]

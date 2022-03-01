@@ -13,6 +13,8 @@
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
     <link href="{% static 'assets/img/favicon.ico' %}" rel="icon">
     <script src="{% static 'assets/js/jquery-3.2.1.js' %}"></script>
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
     <!--<script src="{% static 'assets/js/UserHome.js' %}"></script>-->
 </head>
 
@@ -34,7 +36,7 @@
                           </li>
                             <!---<a class="nav-link" href="wishlist">Search Laws</a>--->
                         </ul>
-                        <form class="d-flex" action="getlaw" method="post">
+                        <form class="d-flex" action="{% url 'getlaw' %}" method="post">
                             {% csrf_token %}
                             <input name="inputTitle" id="inputTitle" class="form-control me-2" type="search" placeholder="Search word or phrase" aria-label="Search">
                             <button id="btnSignIn" class="btn btn-outline-light" type="submit">Search</button>
@@ -86,28 +88,28 @@
 
         <section id="main" class="d-flex align-items-center">
             <div class="container">
-                <div class="jumbotron bg-light card shadow-sm">
+
                     <!--<h1 class="flex-sm-fill text-sm-center">Welcome to the EDHA Laws Repository {{username}}!</h1>-->
                     {% for law in laws %}
                     <div>
-                        <div class="card-body bg-light mb-3 fadeIn">
-                            <div class="row g-0">
+                        <div class="card-body bg-light mb-3 fadeIn col-sm shadow rounded">
+                            <div class="row g-4">
                                 <!--<div class="col-sm-2">
                                     <img src="{% static 'assets/img/Coat_of_arms_of_Nigeria.svg' %}" class="card-img-top h-80" alt="...">
                                 </div>-->
-                                <div class="col-sm shadow">
-                                    <a href="{% url 'display_law' value=law.title|underslash %}" class="underlineHover list-group-item list-group-item-success bg-light bg-gradient">
-                                        <h4 class="card-header rounded bg-success bg-gradient text-white">{{ law.short_title }}</h4>
-                                        <h4 class="card-title">{{ law.title }}</h4>
-                                        <h5 class="card-text"><em>Current stage: {{ law.stage }}</em></h5>
-                                        <h5 class="card-subtitle mb-2 text-muted"><em>Date of assent: {{ law.assent_date }}</em></h5>
+                                <div class="col-sm shadow rounded bg-success opacity-75">
+                                    <a href="{{ law.document.url }}" class="underlineHover list-group-item list-group-item-success bg-light bg-gradient row icon-boxes">
+                                        <h4 class="card-title rounded bg-success-outline bg-gradient">{{ law.short_title }}</h4>
+                                        <h6 class="card-title">{{ law.title }}</h6>
+                                        <h6 class="card-text"><em>Current stage: {{ law.stage }}</em></h6>
+                                        <h6 class="card-subtitle mb-2 text-muted"><em>Date of assent: {{ law.assent_date }}</em></h6>
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {% endfor %}
-                </div>
+
             </div>
         </section><!--  -->
 

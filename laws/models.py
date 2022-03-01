@@ -33,6 +33,7 @@ class BillsAndLaws(models.Model):
     publication = models.DateField(db_column='PUBLICATION', blank=True, null=True)  # Field name made lowercase.
     short_title = models.TextField(db_column='SHORT_TITLE', max_length=100, blank=True,
                                    null=True)  # Field name made lowercase.
+    document = models.FileField(upload_to='files/')
 
     class Meta:
         # managed = False
@@ -77,7 +78,8 @@ class AdminInfo(models.Model):
     pword = models.CharField(db_column='Pword', max_length=20)  # Field name made lowercase.
     designation = models.CharField(db_column='Designation', max_length=50)  # Field name made lowercase.
     role = models.CharField(db_column='Role', max_length=50, choices=ROLES, default='MP')  # Field name made lowercase.
-    department = models.CharField(db_column='Department', max_length=50, choices=DEPARTMENTS, default='ADMIN', blank=True,
+    department = models.CharField(db_column='Department', max_length=50, choices=DEPARTMENTS, default='ADMIN',
+                                  blank=True,
                                   null=True)  # Field name made lowercase.
 
     class Meta:
@@ -85,3 +87,7 @@ class AdminInfo(models.Model):
 
     def __str__(self):
         return self.lastname
+
+
+
+

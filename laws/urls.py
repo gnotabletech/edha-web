@@ -7,3 +7,4 @@ urlpatterns = [
     path('getlaw', views.getlaw, name='getlaw'),
     path('display_law/<value>', views.display_law, name='display_law')
 ]
+

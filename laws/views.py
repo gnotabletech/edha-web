@@ -2,6 +2,7 @@ import os
 
 from django.http import FileResponse
 from django.shortcuts import render
+from django.views.generic import ListView
 
 from edharulesandbiz.settings import BASE_DIR
 from .models import BillsAndLaws, AdminInfo
@@ -36,3 +37,11 @@ def getlaw(request):
 def display_law(request, value):
     filepath = os.path.join('static', 'assets/laws/' + value.strip() + '.pdf')
     return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
+
+
+def error_404(request, exception):
+    return render(request, '404.html')
+
+
+def error_500(request):
+    return render(request, '500.html')

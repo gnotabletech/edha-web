@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3mb!8zstg0vma!p+kb#2o@!1%n406!yrec_xg8kgow3wc7e8ej'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'edharulesandbiz.herokuapp.com', 'localhost', 'edha-gov.herokuapp.com']
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'edharules',
     'laws',
+    'landing',
 ]
 
 MIDDLEWARE = [
@@ -78,9 +79,9 @@ WSGI_APPLICATION = 'edharulesandbiz.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES['default'] = dj_database_url.config(default='postgres://djdgkzbngwjkhv:834cd294190c45b90b1a1e6c53c9ce31aa1869ad99b8870f3d1c636e9a6191f4@ec2-3-219-204-29.compute-1.amazonaws.com:5432/d3skcacqte69e2')
-# DATABASES = {
+#DATABASES = {
 #    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
+#       'ENGINE': 'django.db.backends.postgresql',
 #        'NAME': 'EDHA',
 #        'USER': 'postgres',
 #        'PASSWORD': 'k1kel0m0',
@@ -111,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Lagos'
 
 USE_I18N = True
 
@@ -123,7 +124,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
