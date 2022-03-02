@@ -28,19 +28,32 @@
                 </div>
                 <div class="container-fluid px-4 px-lg-0">
                     <h1 class="fst-italic lh-1 text-white">Welcome to <br><h1 class="fst-normal lh-1 mb-4 text-success">Edo State House of Assembly</h1></h1>
-                    <p class="mb-5 text-muted">Rules of Edo State House of Assembly App and <br>Edo State Bills and Laws Repository App</p>
+                    <p class="mb-4 text-muted">Rules of Edo State House of Assembly App and <br>Edo State Bills and Laws Repository App</p>
                     <!-- Apps List-->
-                    <form id="rulesappForm" action="{% url 'index' %}" method="POST">
+                    <form id="rulesappform" action="{% url 'index' %}" method="POST">
                         {% csrf_token %}
-                        <div class="row input-group-newsletter mb-5 justify-content-center align-items-center" >
-                            <div class="col-auto"><button class="btn btn-success btn-block" id="rulesButton" type="submit" value="rules">Open the Edo State House of Assembly Rules App</button></div>
+                        <div class="row input-group-newsletter mb-2" >
+                            <div class="col-auto"><button class="btn btn-success btn-block" id="rulesappbutton" type="submit" value="rules">Open the Edo State House of Assembly Rules App</button></div>
                         </div>
                     </form>
-                    <form id="searchForm" action="{% url 'getlaw' %}" method="POST">
+                    <form id="rulessearchform" action="{% url 'search' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row input-group-newsletter mb-4">
+                            <div class="col"><input class="form-control" id="info" name="info" type="text" placeholder="quick search rules" aria-label="Search law repository" data-sb-validations="required" /></div>
+                            <div class="col-auto"><button class="btn btn-success" id="rulessearchbutton" type="submit" value="Search">Quick Search</button></div>
+                        </div>
+                    </form>
+                    <form id="lawsappform" action="{% url 'laws' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row input-group-newsletter mb-2" >
+                            <div class="col-auto"><button class="btn btn-success btn-block" id="lawswappbutton" type="submit" value="rules">Open the Edo State Laws Repository App</button></div>
+                        </div>
+                    </form>
+                    <form id="lawssearchform" action="{% url 'getlaw' %}" method="POST">
                         {% csrf_token %}
                         <div class="row input-group-newsletter">
                             <div class="col"><input class="form-control" id="inputTitle" name="inputTitle" type="text" placeholder="quick search laws repository" aria-label="Search law repository" data-sb-validations="required" /></div>
-                            <div class="col-auto"><button class="btn btn-success" id="submitButton" type="submit" value="Search">Quick Search</button></div>
+                            <div class="col-auto"><button class="btn btn-success" id="lawssearchbutton" type="submit" value="Search">Quick Search</button></div>
                         </div>
                     </form>
                 </div>
