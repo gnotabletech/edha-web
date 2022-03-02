@@ -26,9 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3mb!8zstg0vma!p+kb#2o@!1%n406!yrec_xg8kgow3wc7e8ej'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'edharulesandbiz.herokuapp.com', 'localhost', 'edha-gov.herokuapp.com', 'edha2-gov.herokuapp.com', 'edha3-gov.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'edharulesandbiz.herokuapp.com', 'localhost', 'edha-gov.herokuapp.com',
+                 'edha2-gov.herokuapp.com', 'edha3-gov.herokuapp.com']
 
 # Application definition
 
@@ -78,9 +79,10 @@ WSGI_APPLICATION = 'edharulesandbiz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES['default'] = dj_database_url.config(default='postgres://djdgkzbngwjkhv:834cd294190c45b90b1a1e6c53c9ce31aa1869ad99b8870f3d1c636e9a6191f4@ec2-3-219-204-29.compute-1.amazonaws.com:5432/d3skcacqte69e2')
+DATABASES['default'] = dj_database_url.config(
+    default='postgres://djdgkzbngwjkhv:834cd294190c45b90b1a1e6c53c9ce31aa1869ad99b8870f3d1c636e9a6191f4@ec2-3-219-204-29.compute-1.amazonaws.com:5432/d3skcacqte69e2')
 # DATABASES['default'] = dj_database_url.config(default='postgres://postgres://aahmyixvjorxtq:c706dc7f5fb01e7fbd6ff8c270116631368aba14502a20bac4c04f06f230f710@ec2-52-30-133-191.eu-west-1.compute.amazonaws.com:5432/da3pnldvk9t1jk')
-#DATABASES = {
+# DATABASES = {
 #    'default': {
 #       'ENGINE': 'django.db.backends.postgresql',
 #        'NAME': 'EDHA',
@@ -88,7 +90,7 @@ DATABASES['default'] = dj_database_url.config(default='postgres://djdgkzbngwjkhv
 #        'PASSWORD': 'k1kel0m0',
 #        'HOST': 'localhost'
 #    }
-#}
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
