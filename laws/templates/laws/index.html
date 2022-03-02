@@ -95,9 +95,9 @@
                     <!--<h1 class="flex-sm-fill text-sm-center">Welcome to the EDHA Laws Repository {{username}}!</h1>-->
                     {% for law in laws %}
                     <div>
-                        <div class="card-body bg-light mb-3 fadeIn col-sm shadow rounded">
+                        <div class="card-body bg-light mb-3 fadeIn col-sm shadow">
                             <div class="row g-4">
-                                <div class="col-sm-1 fadeIn">
+                                <div class="col-sm-1 fadeIn rounded">
                                     <embed src="{{ law.document.url }}" type="application/pdf" height="140px" width="100">
                                 </div>
                                 <div class="col-sm shadow rounded bg-light opacity-75">
