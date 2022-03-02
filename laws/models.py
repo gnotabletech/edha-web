@@ -6,7 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-from django import forms
+from django.utils import timezone
 
 
 class BillsAndLaws(models.Model):
@@ -33,7 +33,7 @@ class BillsAndLaws(models.Model):
     publication = models.DateField(db_column='PUBLICATION', blank=True, null=True)  # Field name made lowercase.
     short_title = models.TextField(db_column='SHORT_TITLE', max_length=100, blank=True,
                                    null=True)  # Field name made lowercase.
-    document = models.FileField(upload_to='files/')
+    document = models.FileField(upload_to='files', default=timezone.now)
 
     class Meta:
         # managed = False

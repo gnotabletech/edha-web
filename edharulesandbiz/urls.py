@@ -18,12 +18,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from landing import views
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('home', views.index, name='home'),
+    path('', include('landing.urls')),
     path('edharules/', include('edharules.urls')),
     path('laws/', include('laws.urls'))
 ]
