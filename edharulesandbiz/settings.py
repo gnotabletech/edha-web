@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'edharulesandbiz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES['default'] = dj_database_url.config(default='postgres://djdgkzbngwjkhv:834cd294190c45b90b1a1e6c53c9ce31aa1869ad99b8870f3d1c636e9a6191f4@ec2-3-219-204-29.compute-1.amazonaws.com:5432/d3skcacqte69e2')
+DATABASES['default'] = dj_database_url.config(default='postgres://aahmyixvjorxtq:c706dc7f5fb01e7fbd6ff8c270116631368aba14502a20bac4c04f06f230f710@ec2-52-30-133-191.eu-west-1.compute.amazonaws.com:5432/da3pnldvk9t1jk')
 #DATABASES = {
 #    'default': {
 #       'ENGINE': 'django.db.backends.postgresql',
