@@ -10,6 +10,7 @@ django-bootstrap-modal-forms = "*"
 psycopg2 = "*"
 pillow = "*"
 dj-database-url = "*"
+django-environ = "*"
 
 [dev-packages]
 

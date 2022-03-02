@@ -79,6 +79,7 @@ WSGI_APPLICATION = 'edharulesandbiz.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES['default'] = dj_database_url.config(default='postgres://djdgkzbngwjkhv:834cd294190c45b90b1a1e6c53c9ce31aa1869ad99b8870f3d1c636e9a6191f4@ec2-3-219-204-29.compute-1.amazonaws.com:5432/d3skcacqte69e2')
+# DATABASES['default'] = dj_database_url.config(default='postgres://postgres://aahmyixvjorxtq:c706dc7f5fb01e7fbd6ff8c270116631368aba14502a20bac4c04f06f230f710@ec2-52-30-133-191.eu-west-1.compute.amazonaws.com:5432/da3pnldvk9t1jk')
 #DATABASES = {
 #    'default': {
 #       'ENGINE': 'django.db.backends.postgresql',
@@ -130,3 +131,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = ''
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''

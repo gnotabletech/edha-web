@@ -28,5 +28,5 @@ if settings.DEBUG:
 
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler404 = 'edharules.views.error_404'
-handler500 = 'edharules.views.error_500'
+handler404 = 'landing.views.error_404'
+handler500 = 'landing.views.error_500'

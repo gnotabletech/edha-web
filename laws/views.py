@@ -16,7 +16,7 @@ def laws_repo(request):
     assented_laws_count = BillsAndLaws.objects.filter(stage='ASSENTED TO').count()
     pending_laws_count = BillsAndLaws.objects.exclude(stage='ASSENTED TO').count()
     awaiting_assent_count = BillsAndLaws.objects.filter(stage='AWAITING ASSENT').count()
-    return render(request, 'laws/userHome.html',
+    return render(request, 'laws/index.html',
                   {'user': user, 'laws': laws, 'laws_count': laws_count, 'assented_laws_count': assented_laws_count,
                    'pending_laws_count': pending_laws_count, 'awaiting_assent_count': awaiting_assent_count})
 
@@ -29,7 +29,7 @@ def getlaw(request):
     assented_laws_count = BillsAndLaws.objects.filter(stage='ASSENTED TO').count()
     pending_laws_count = BillsAndLaws.objects.exclude(stage='ASSENTED TO').count()
     awaiting_assent_count = BillsAndLaws.objects.filter(stage='AWAITING ASSENT').count()
-    return render(request, 'laws/userHome.html',
+    return render(request, 'laws/index.html',
                   {'laws': laws, 'user': user, 'laws_count': laws_count, 'assented_laws_count': assented_laws_count,
                    'pending_laws_count': pending_laws_count, 'awaiting_assent_count': awaiting_assent_count})
 
@@ -37,11 +37,3 @@ def getlaw(request):
 def display_law(request, value):
     filepath = os.path.join('static', 'assets/laws/' + value.strip() + '.pdf')
     return FileResponse(open(filepath, 'rb'), content_type='application/pdf')
-
-
-def error_404(request, exception):
-    return render(request, '404.html')
-
-
-def error_500(request):
-    return render(request, '500.html')
