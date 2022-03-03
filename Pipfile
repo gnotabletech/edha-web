@@ -11,6 +11,7 @@ psycopg2 = "*"
 pillow = "*"
 dj-database-url = "*"
 django-environ = "*"
+whitenoise = {extras = ["brotli"], version = "*"}
 
 [dev-packages]
 
