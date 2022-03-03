@@ -124,8 +124,7 @@
                       <h5 class="modal-title" id="exampleModalLabel{{ law.pk }}">{{ law.short_title }}</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                      <iframe class="modal-body" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:1008px;height:280px" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1008" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="{{ law.document.url }}" data-google-container-id="a!2" data-google-query-id="CIO0m9XkqvYCFaS2cQodfx4MSg" data-load-complete="true"></iframe>
-
+                    <iframe class="modal-body" src="{{ law.document.url }}#toolbar=1#zoom=50" height="600px" width="100%"></iframe>
                     <div class="modal-footer bg-light shadow">
                       <em>Signed {{ law.assent_date }}</em>
                     </div>
