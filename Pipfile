@@ -11,6 +11,8 @@ psycopg2 = "*"
 pillow = "*"
 dj-database-url = "*"
 django-environ = "*"
+boto3 = "*"
+django-storages = "*"
 
 [dev-packages]
 
