@@ -98,10 +98,10 @@
                         <div class="card-body bg-light mb-3 fadeIn col-sm shadow">
                             <div class="row g-4">
                                 <div class="col-sm-1 fadeIn rounded">
-                                    <embed src="{{ law.document.url }}" type="application/pdf" height="140px" width="100" page="1" scrollbar="0">
+                                    <embed src="{{ law.document.url }}" type="application/pdf" height="140px" width="100" view="Fit" page="1" scrollbar="0">
                                 </div>
                                 <div class="col-sm shadow rounded bg-light opacity-75">
-                                    <a href="{{ law.document.url }}" class="underlineHover list-group-item list-group-item-success bg-light bg-gradient row icon-boxes">
+                                    <a class="underlineHover list-group-item list-group-item-success bg-light bg-gradient row icon-boxes" data-bs-toggle="modal" data-bs-target="#exampleModal{{ law.pk }}">
                                         <h4 class="card-title rounded bg-success-outline bg-gradient">{{ law.short_title }}</h4>
                                         <h6 class="card-title">{{ law.title }}</h6>
                                         <h6 class="card-text"><em>Current stage: {{ law.stage }}</em></h6>
@@ -115,7 +115,23 @@
 
             </div>
         </section><!--  -->
-
+<!-- Modal -->
+            {% for law in laws %}
+              <div class="modal fade" id="exampleModal{{ law.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ law.pk }}" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header bg-success bg-gradient text-white">
+                      <h5 class="modal-title" id="exampleModalLabel{{ law.pk }}">{{ law.short_title }}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <iframe src="{{ law.document.url }}" height="140px" width="100"></iframe>
+                    <div class="modal-footer bg-light shadow">
+                      <em>Signed {{ law.assent_date }}</em>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
         <section id="footer" class="align-items-center">
             <footer id="formFooter">
                 <p>Copyright &copy Gnotable Technologies <em id="date"></em></p>
