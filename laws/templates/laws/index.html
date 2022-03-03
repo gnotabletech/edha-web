@@ -124,7 +124,7 @@
                       <h5 class="modal-title" id="exampleModalLabel{{ law.pk }}">{{ law.short_title }}</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <iframe class="modal-body" src="{{ law.document.url }}" height="600px" width="480px"></iframe>
+                    <iframe class="modal-body" src="{{ law.document.url }}#toolbar=1#zoom=FitW" height="600px" width="100%"></iframe>
                     <div class="modal-footer bg-light shadow">
                       <em>Signed {{ law.assent_date }}</em>
                     </div>
