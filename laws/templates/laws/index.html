@@ -120,11 +120,11 @@
               <div class="modal fade" id="exampleModal{{ law.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ law.pk }}" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
-                    <div class="modal-header bg-success bg-gradient text-white">
+                    <div class="modal-header bg-light bg-gradient text-white">
                       <h5 class="modal-title" id="exampleModalLabel{{ law.pk }}">{{ law.short_title }}</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <iframe src="{{ law.document.url }}" height="140px" width="100"></iframe>
+                    <iframe src="{{ law.document.url }}" height="800px" width="100%"></iframe>
                     <div class="modal-footer bg-light shadow">
                       <em>Signed {{ law.assent_date }}</em>
                     </div>
