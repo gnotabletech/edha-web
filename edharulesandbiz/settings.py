@@ -139,7 +139,7 @@ AWS_LOCATION = 'static'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-STATIC_URL = os.environ.get('AWS_URL')
+STATIC_URL = AWS_LOCATION
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # STATIC_URL = 'static/'
