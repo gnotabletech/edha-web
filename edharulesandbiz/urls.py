@@ -24,9 +24,6 @@ urlpatterns = [
     path('edharules/', include('edharules.urls')),
     path('laws/', include('laws.urls'))
 ]
-if settings.DEBUG:
-
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'landing.views.error_404'
 handler500 = 'landing.views.error_500'
