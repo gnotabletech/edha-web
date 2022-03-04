@@ -1,1 +1,1 @@
-web: gunicorn edharulesandbiz.wsgi
+web: python manage.py migrate && gunicorn edharulesandbiz.wsgi
