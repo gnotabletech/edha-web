@@ -40,7 +40,7 @@ class BillsAndLaws(models.Model):
         db_table = 'Bills_and_Laws'
 
     def save(self, *args, **kwargs):
-        self.document = f'{self.short_title}.pdf'
+        self.document = f'{self.short_title}.pdf'.replace('/', '_')
         super().save(*args, **kwargs)
 
     def __str__(self):
