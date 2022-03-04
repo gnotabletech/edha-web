@@ -54,6 +54,7 @@ class BillsAndLaws(models.Model):
     def save(self, *args, **kwargs):
         self.document = f'{self.short_title}.pdf'.replace('/', '_').replace(') (', '_').replace(') ', '_').replace(' (', '_').replace(
             ', ', '_').replace(' ', '_')
+        self.STAGES = self.get_STAGES_display()
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -101,6 +102,11 @@ class AdminInfo(models.Model):
 
     class Meta:
         db_table = 'AdminInfo'
+
+    def save(self, *args, **kwargs):
+        self.role = self.get_role_display()
+        self.department = self.get_departments_display()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.lastname
