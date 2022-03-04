@@ -105,7 +105,7 @@ class AdminInfo(models.Model):
 
     def save(self, *args, **kwargs):
         self.department = self.department.name
-        self.roel = self.role.name
+        self.role = self.role.name
         super().save(*args, **kwargs)
 
     def __str__(self):
