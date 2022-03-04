@@ -17,7 +17,7 @@ from edharulesandbiz import settings
 class OverwriteStorage(FileSystemStorage):
     def get_available_name(self, name):
         if self.exists(name):
-            os.remove(os.path.join(settings.DEFAULT_FILE_STORAGE, name))
+            os.remove(os.path.join(settings.MEDIA_ROOT, name))
         return name
 
 
@@ -51,11 +51,11 @@ class BillsAndLaws(models.Model):
         # managed = False
         db_table = 'Bills_and_Laws'
 
-    # def save(self, *args, **kwargs):
-    #    self.document = f'{self.short_title}.pdf'.replace('/', '_').replace(') (', '_').replace(') ', '_').replace(' (',
-    #                                                                                                               '_').replace(
-    #        ', ', '_').replace(' ', '_')
-    #    super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        self.document = f'{self.short_title}.pdf'.replace('/', '_').replace(') (', '_').replace(') ', '_').replace(' (',
+                                                                                                                   '_').replace(
+            ', ', '_').replace(' ', '_')
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
