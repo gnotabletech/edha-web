@@ -39,6 +39,10 @@ class BillsAndLaws(models.Model):
         # managed = False
         db_table = 'Bills_and_Laws'
 
+    def save(self, *args, **kwargs):
+        self.document = f'{self.short_title}.pdf'
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.title
 
@@ -87,7 +91,3 @@ class AdminInfo(models.Model):
 
     def __str__(self):
         return self.lastname
-
-
-
-
