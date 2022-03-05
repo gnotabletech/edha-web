@@ -22,8 +22,8 @@
         <video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><source src="{% static 'assets/mp4/bg1.mp4' %}" type="video/mp4" /></video>
         <!-- Masthead-->
         <div class="masthead success">
-            <div class="masthead-content text-white">
-                <div class="input-group">
+            <nav class="navbar sticky-top navbar-expand-md">
+                    <div class="input-group">
                         <form class="d-flex" action="" method="post">
                             {% csrf_token %}
                             <input name="username" id="username" class="form-control me-2" type="text" placeholder="username" aria-label="Username">
@@ -31,6 +31,8 @@
                             <button id="btnSignIn" class="btn btn-outline-light btn-block" type="submit">Login</button>
                         </form>
                     </div>
+                </nav>
+            <div class="masthead-content text-white">
                 <div class="container-fluid px-4 px-lg-0 fadeIn first">
                     <img src="{% static 'assets/img/Coat_of_arms_of_Nigeria.svg' %}" alt="" class="img-fluid" width="100px">
                 </div>
