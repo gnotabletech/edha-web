@@ -13,6 +13,8 @@ dj-database-url = "*"
 django-environ = "*"
 boto3 = "*"
 django-storages = "*"
+python-decouple = "*"
+django-decouple = "*"
 
 [dev-packages]
 

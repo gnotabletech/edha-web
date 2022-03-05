@@ -18,6 +18,16 @@
         <link href="{% static 'assets/css/styles.css' %}" rel="stylesheet" />
     </head>
     <body>
+    <nav class="navbar sticky-top navbar-expand-md">
+                    <div class="container-fluid">
+                        <form class="d-flex" action="" method="post">
+                            {% csrf_token %}
+                            <input name="username" id="username" class="form-control me-2" type="text" placeholder="username" aria-label="Username">
+                            <input name="password" id="password" class="form-control me-2" type="password" placeholder="password" aria-label="Password">
+                            <button id="btnSignIn" class="btn btn-outline-light" type="submit">Sign In</button>
+                        </form>
+                    </div>
+                </nav>
         <!-- Background Video-->
         <video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><source src="{% static 'assets/mp4/bg1.mp4' %}" type="video/mp4" /></video>
         <!-- Masthead-->
