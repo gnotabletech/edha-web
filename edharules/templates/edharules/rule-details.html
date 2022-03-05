@@ -13,7 +13,7 @@
       <nav id="navbar" class="navbar sticky-top navbar-expand-md">
        <ul>
          <li><a class="nav-link scrollto active" href="{% url 'home' %}">Home</a></li>
-          <li><a class="nav-link scrollto active" href="{% url 'index' %}">Go back</a></li>
+          <li><a class="nav-link scrollto active" href="{% url 'index' %}">Back to rules</a></li>
           <!--<li class="dropdown"><a href=""><span>Jump to Sections</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               {% for section in sections %}
@@ -37,7 +37,7 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2>{{ rules.rule_section_title}}</h2>
           <ol>
-            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'index' %}">RULES</a></li>
             <li>{{ rules.rule_subsection_title}}</li>
             <li>Rule {{ rules.rule_section_num }}</li>
             <li>Paragraph {{ rules.rule_subsection_num }}</li>
