@@ -15,6 +15,7 @@ boto3 = "*"
 django-storages = "*"
 python-decouple = "*"
 django-decouple = "*"
+django-pwa = "*"
 
 [dev-packages]
 

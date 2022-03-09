@@ -19,6 +19,7 @@ import django_heroku
 from django.conf.global_settings import DATABASES
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'serviceworker.js')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -27,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'edharulesandbiz.herokuapp.com', 'localhost', 'edha-gov.herokuapp.com',
                  'edha2-gov.herokuapp.com', 'edha3-gov.herokuapp.com']
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'edharules',
     'laws',
     'landing',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +83,8 @@ WSGI_APPLICATION = 'edharulesandbiz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES['default'] = dj_database_url.config(default=os.environ.get('DATABASES_URL'))
+DATABASES['default'] = dj_database_url.config(
+    default=os.environ.get('DATABASE_URL'))
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -154,3 +157,47 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 
+PWA_APP_NAME = 'EDHA E-Parliament'
+PWA_APP_DESCRIPTION = "EDHA E-Parliament PWA"
+PWA_APP_THEME_COLOR = '#000000'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+PWA_APP_ICONS = [
+    {
+        'src': 'static/assets/img/favicon.ico',
+        'sizes': '256x256'
+    },
+    {
+        'src': 'static/assets/img/icon2.png',
+        'sizes': '512x512'
+    }
+,
+    {
+        'src': 'static/assets/img/maskable_icon.png',
+        'sizes': '512x512',
+        'purpose': 'maskable'
+    },
+    {
+        'src': 'static/assets/img/maskable_icon_x192.png',
+        'sizes': '192x192',
+        'purpose': 'maskable'
+    }
+]
+PWA_APP_ICONS_APPLE = [
+    {
+        'src': 'static/assets/img/icon-160x160.png',
+        'sizes': '160x160'
+    }
+]
+PWA_APP_SPLASH_SCREEN = [
+    {
+        'src': 'static/assets/img/Mace.png',
+        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+    }
+]
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'en-US'
