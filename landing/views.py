@@ -1,4 +1,12 @@
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.template.loader import get_template
+
+
+def serviceworker(request, js):
+    template = get_template('serviceworker.js')
+    html = template.render()
+    return HttpResponse(html, content_type="application/x-javascript")
 
 
 # Create your views here.

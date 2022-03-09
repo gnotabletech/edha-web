@@ -65,7 +65,7 @@ ROOT_URLCONF = 'edharulesandbiz.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR, 'templates'],
+        'DIRS': [BASE_DIR, 'templates', os.path.join(BASE_DIR, ''), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -157,8 +157,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 
-PWA_APP_NAME = 'EDHA E-Parliament'
-PWA_APP_DESCRIPTION = "EDHA E-Parliament PWA"
+PWA_APP_NAME = 'edha e-parliament'
+PWA_APP_DESCRIPTION = "edha e-parliament PWA"
 PWA_APP_THEME_COLOR = '#000000'
 PWA_APP_BACKGROUND_COLOR = '#ffffff'
 PWA_APP_DISPLAY = 'standalone'
@@ -175,7 +175,7 @@ PWA_APP_ICONS = [
         'src': 'static/assets/img/icon2.png',
         'sizes': '512x512'
     }
-,
+    ,
     {
         'src': 'static/assets/img/maskable_icon.png',
         'sizes': '512x512',
