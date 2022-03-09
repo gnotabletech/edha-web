@@ -4,7 +4,7 @@ from django.shortcuts import render
 from edharulesandbiz import settings
 
 
-def serviceworker(request):
+def service_worker(request):
     response = HttpResponse(open(settings.PWA_SERVICE_WORKER_PATH).read(), content_type='application/javascript')
     return response
 
