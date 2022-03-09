@@ -17,6 +17,7 @@ python-decouple = "*"
 django-decouple = "*"
 django-pwa = "*"
 botocore = "==1.24.16"
+django = "*"
 
 [dev-packages]
 
