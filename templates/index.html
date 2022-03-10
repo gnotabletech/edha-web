@@ -1,39 +1,11 @@
-<!DOCTYPE html>
-{% load static %}
-{% load pwa %}
-<html lang="en">
 
-    <head>
-        {% progressive_web_app_meta %}
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>EDO STATE HOUSE OF ASSEMBLY - Welcome</title>
-        <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'assets/css/styles.css' %}" rel="stylesheet" />
-        <link rel="manifest" href="manifest.json">
-    </head>
-    <body>
-        <!-- Background Video-->
-        <video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><source src="{% static 'assets/mp4/bg1.mp4' %}" type="video/mp4" /></video>
-        <!-- Masthead-->
-        <div class="masthead success">
-            <div class="masthead-content text-white">
-                <div class="container-fluid px-4 px-lg-0 fadeIn first">
-                    <img src="{% static 'assets/img/Coat_of_arms_of_Nigeria.svg' %}" alt="" class="img-fluid" width="100px">
-                </div>
-                <div class="container-fluid px-4 px-lg-0">
-                    <h1 class="fst-italic lh-1 text-white">Welcome to <br><h1 class="fst-normal lh-1 mb-4 text-success">Edo State House of Assembly</h1></h1>
-                    <p class="mb-4 text-muted">Rules of Edo State House of Assembly App and <br>Edo State Bills and Laws Repository App</p>
+{% extends 'base_landing.html' %}
+{% block content %}
                     <!-- Apps List-->
+        <div class="form-group">
+                <div class="container-fluid px-4 px-lg-0 fadeIn first">
+                    <img src="{% static 'assets/img/Mace.png' %}" alt="" class="img-fluid" width="100px" height="auto">
+                </div>
                     <form id="rulesappform" action="{% url 'index' %}" method="POST">
                         {% csrf_token %}
                         <div class="row input-group-newsletter mb-2" >
@@ -60,23 +32,5 @@
                             <div class="col-auto"><button class="btn btn-success" id="lawssearchbutton" type="submit" value="Search">Quick Search</button></div>
                         </div>
                     </form>
-                </div>
-            </div>
         </div>
-        <!-- Social Icons-->
-        <!-- For more icon options, visit https://fontawesome.com/icons?d=gallery&p=2&s=brands-->
-        <div class="social-icons">
-            <div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
-                <img src="{% static 'assets/img/mace.png' %}" alt="" class="img-fluid">
-                <a class="btn btn-success m-3" href="#!"><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-success m-3" href="#!"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-success m-3" href="#!"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="{% static 'assets/js/scripts.js' %}"></script>
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-    </body>
-</html>
+{% endblock %}

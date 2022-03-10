@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('landing.urls')),
     path('edharules/', include('edharules.urls')),
-    path('laws/', include('laws.urls'))
+    path('laws/', include('laws.urls')),
+    path('', include('authenticate.urls'))
 ]
 
 if settings.DEBUG:
