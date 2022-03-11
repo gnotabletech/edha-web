@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'laws',
     'landing',
     'pwa',
-    'sendgrid',
 ]
 
 MIDDLEWARE = [
@@ -153,15 +152,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 465
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
-
-SENDGRID_EMAIL_HOST = "smtp.sendgrid.net"
-SENDGRID_EMAIL_PORT = 587
-SENDGRID_EMAIL_USERNAME = os.environ.get('SENDGRID_USERNAME')
-SENDGRID_EMAIL_PASSWORD = os.environ.get('SENDGRID_PASSWORD')
 
 PWA_APP_NAME = 'EDHA E-Parliament'
 PWA_APP_DESCRIPTION = "EDHA E-Parliament PWA"
