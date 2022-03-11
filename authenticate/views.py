@@ -39,7 +39,7 @@ def login_user_quicksearch(request):
             return redirect('getlaw')
         else:
             messages.warning(request, "Username or Password is incorrect !!")
-            return redirect('login_quicksearch')
+            return redirect('login_user_quicksearch')
     else:
         return render(request, 'authenticate/login_quicksearch.html')
 
