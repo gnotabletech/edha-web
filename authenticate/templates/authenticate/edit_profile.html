@@ -9,7 +9,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-outline-info mb-3">Update</button>
-        <p><a href="{% url 'change_password' %}">Click Here</a> To Change Your Password </p>
+        <p><a href="{% url 'change_password' %}">Click Here</a> to change your password </p>
     </form>
 </div>
 {% endblock content %}
