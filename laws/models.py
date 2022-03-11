@@ -35,6 +35,7 @@ class BillsAndLaws(models.Model):
     assent_date = models.DateField(db_column='ASSENT_DATE', blank=True, null=True)  # Field name made lowercase.
     stage = models.CharField(db_column='STAGE', max_length=20, choices=STAGES,
                              default='STAGE1')  # Field name made lowercase.
+    stage_key = models.CharField(max_length=6, choices=STAGES, default='STAGE1')  # Field name made lowercase.
     sponsor = models.CharField(db_column='SPONSOR', max_length=50, blank=True, null=True)  # Field name made lowercase.
     first_reading = models.DateField(db_column='FIRST_READING', blank=True, null=True)  # Field name made lowercase.
     second_reading = models.DateField(db_column='SECOND_READING', blank=True, null=True)  # Field name made lowercase.
@@ -52,9 +53,10 @@ class BillsAndLaws(models.Model):
         db_table = 'Bills_and_Laws'
 
     def save(self, *args, **kwargs):
-        self.document = f'{self.short_title}.pdf'.replace('/', '_').replace(') (', '_').replace(') ', '_').replace(' (', '_').replace(
+        self.document = f'{self.short_title}.pdf'.replace('/', '_').replace(') (', '_').replace(') ', '_').replace(' (',
+                                                                                                                   '_').replace(
             ', ', '_').replace(' ', '_')
-        self.stage = self.get_stage_display()
+        self.stage = self.get_stage_key_display()
         super().save(*args, **kwargs)
 
     def __str__(self):
