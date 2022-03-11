@@ -25,12 +25,13 @@ PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'serviceworker.js')
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('DATABASE_URL')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost', 'edha-gov.herokuapp.com', 'edha3-gov.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'edharulesandbiz.herokuapp.com', 'localhost', 'edha-gov.herokuapp.com',
+                 'edha2-gov.herokuapp.com', 'edha3-gov.herokuapp.com']
 
 # Application definition
 
