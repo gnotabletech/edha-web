@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="text-center mt-4 text-muted">
     <h2>Member/Staff Login</h2>
 </div>
+ <div class="fadeIn first text-center mb-3 mt-3">
+        <img src="{% static 'assets/img/Coat_of_arms_of_Nigeria.svg' %}" alt="" class="img-fluid" width="150px">
+    </div>
 <div class="col-md-6 offset-md-3">
     {% if messages %}
     {% for message in messages %}
@@ -13,6 +17,7 @@
     </div>
     {% endfor %}
     {% endif %}
+
     <form action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         <div class="form-group mb-3">
