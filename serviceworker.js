@@ -3,7 +3,7 @@ self.addEventListener('install', function(event){
     event.waitUntil(
         caches.open(staticCacheName).then(function(cache){
             return cache.addAll([
-                "./templates/base_landing.html",
+                "./",
                 "./static/assets/css/style.css",
                 "./static/assets/css/styles.css",
                 "./static/assets/css/signup.css",
@@ -24,8 +24,8 @@ self.addEventListener('install', function(event){
 self.addEventListener('fetch', function(event){
     var requestURL = new URL(event.request.url);
         if (requestURL.origin === location.origin){
-            if((requestURL.pathname === "./")){
-                event.respondWith(caches.match("./"));
+            if((requestURL.pathname === "./templates/base_landing.html")){
+                event.respondWith(caches.match("./templates/base_landing.html"));
                 return;
             }
         }

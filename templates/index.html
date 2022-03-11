@@ -3,9 +3,6 @@
 {% block content %}
                     <!-- Apps List-->
         <div class="form-group">
-                <div class="container-fluid px-4 px-lg-0 fadeIn first">
-                    <img src="{% static 'assets/img/Mace.png' %}" alt="" class="img-fluid" width="100px" height="auto">
-                </div>
                     <form id="rulesappform" action="{% url 'index' %}" method="POST">
                         {% csrf_token %}
                         <div class="row input-group-newsletter mb-2" >
