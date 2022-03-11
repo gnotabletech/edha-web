@@ -3,7 +3,7 @@ from .models import BillsAndLaws, AdminInfo
 
 
 class BillsAndLawsAdmin(admin.ModelAdmin):
-    search_fields = ['TITLE', 'SHORT_TITLE']
+    search_fields = ['title', 'short_title']
 
 
 # Register your models here.

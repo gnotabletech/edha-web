@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'edharulesandbiz.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES['default'] = dj_database_url.config(
-    default=os.environ.get('MVP_DATABASE_URL'))
+    default=os.environ.get('HEROKU_POSTGRESQL_CHARCOAL_URL'))
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
