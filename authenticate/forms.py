@@ -51,3 +51,4 @@ class ChangePasswordForm(PasswordChangeForm):
 
     class Meta:
         model = User
+

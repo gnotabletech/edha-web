@@ -5,7 +5,7 @@ from .forms import SignUpForm, EditProfileForm, ChangePasswordForm
 from django.contrib.auth.models import User
 
 
-def home(request):
+def authentication_home(request):
     return render(request, 'authenticate/home.html')
 
 
