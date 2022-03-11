@@ -16,7 +16,7 @@
     </div>
     {% endfor %}
     {% endif %}
-    <form action="{% url 'login_quicksearch' %}" method="POST">
+    <form action="{% url 'login_user_quicksearch' %}" method="POST">
         {% csrf_token %}
         <div class="form-group mb-3">
             <label for="username">Username:</label>
