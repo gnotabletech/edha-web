@@ -43,48 +43,5 @@ def getlaw(request):
                       {'laws': laws, 'user': user, 'laws_count': laws_count, 'assented_laws_count': assented_laws_count,
                        'pending_laws_count': pending_laws_count, 'awaiting_assent_count': awaiting_assent_count})
     else:
-        return redirect('login_quicksearch')
+        return redirect('login_user_quicksearch')
 
-
-def signup(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect('home')
-
-        else:
-            return render(request, 'laws/signup.html', {'form': form})
-
-    else:
-        form = UserCreationForm()
-        return render(request, 'laws/signup.html', {'form': form})
-
-
-def signin(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-        else:
-            form = AuthenticationForm()
-            return render(request, 'index.html', {'form': form})
-
-    else:
-        form = AuthenticationForm()
-        return render(request, 'index.html', {'form': form})
