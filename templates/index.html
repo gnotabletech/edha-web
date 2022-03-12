@@ -2,21 +2,21 @@
 {% extends 'base_landing.html' %}
 {% block content %}
                     <!-- Apps List-->
-        <div class="form-group">
-                    <form id="rulesappform" action="{% url 'index' %}" method="POST">
+        <div class="form-group" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+                    <form id="rulesappform" action="{% url 'index' %}" method="POST" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000" data-aos-once="true">
                         {% csrf_token %}
                         <div class="row input-group-newsletter mb-2" >
                             <div class="col-auto"><button class="btn btn-success btn-block" id="rulesappbutton" type="submit" value="rules">Open the Edo State House of Assembly Rules App</button></div>
                         </div>
                     </form>
-                    <form id="rulessearchform" action="{% url 'search' %}" method="POST">
+                    <form id="rulessearchform" action="{% url 'search' %}" method="POST" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000" data-aos-once="true">
                         {% csrf_token %}
                         <div class="row input-group-newsletter mb-4">
                             <div class="col"><input class="form-control" id="info" name="info" type="text" placeholder="quick search rules" aria-label="Search law repository" data-sb-validations="required" /></div>
                             <div class="col-auto"><button class="btn btn-success" id="rulessearchbutton" type="submit" value="Search">Quick Search</button></div>
                         </div>
                     </form>
-                    <form id="lawsappform" action="{% url 'laws' %}" method="POST">
+                    <form id="lawsappform" action="{% url 'laws' %}" method="POST" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000" data-aos-once="true">
                         {% csrf_token %}
                         <div class="row input-group-newsletter mb-2" >
                             <div class="col-auto"><button class="btn btn-success btn-block" id="lawswappbutton" type="submit" value="rules">Open the Edo State Laws Repository App</button></div>

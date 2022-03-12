@@ -25,10 +25,10 @@ PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'serviceworker.js')
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'django-insecure-3mb!8zstg0vma!p+kb#2o@!1%n406!yrec_xg8kgow3wc7e8ej'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost', 'edha-gov.herokuapp.com', 'edha3-gov.herokuapp.com']
 
@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'edharulesandbiz.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES['default'] = dj_database_url.config(
-    default=os.environ.get('HEROKU_POSTGRESQL_CHARCOAL_URL'))
+    default='postgres://kijntandnqzktn:aacab98effc63794b62d8559b8dc3d168436758e2f0345f92a7d3c7ee3fcf695@ec2-52-31-221-164.eu-west-1.compute.amazonaws.com:5432/dbj1toannelt42')
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

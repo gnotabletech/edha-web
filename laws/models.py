@@ -51,6 +51,7 @@ class BillsAndLaws(models.Model):
     class Meta:
         # managed = False
         db_table = 'Bills_and_Laws'
+        verbose_name_plural = "Bills and Laws"
 
     def save(self, *args, **kwargs):
         self.document = f'{self.short_title}.pdf'.replace('/', '_').replace(') (', '_').replace(') ', '_').replace(' (',
@@ -104,6 +105,7 @@ class AdminInfo(models.Model):
 
     class Meta:
         db_table = 'AdminInfo'
+        verbose_name_plural = "Admin Info"
 
     def save(self, *args, **kwargs):
         self.department = self.get_department_display()
