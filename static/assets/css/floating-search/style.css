@@ -3,9 +3,9 @@ body {
 }
 .event__search__floater {
   position: fixed;
-  bottom: 50px;
+  bottom: 10px;
 /*   left:0; */
-  right: 50px;
+  right: 21px;
   transition: all ease-in-out 0.2s;
   transform: translate(-50%, -50%);
     z-index:5;
@@ -42,7 +42,7 @@ body {
   cursor: pointer;
 }
 .search__bar:focus {
-  width: 400px;
+  width: 200px;
   left:auto;
   opacity: 1;
   cursor: text;
