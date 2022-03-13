@@ -44,7 +44,7 @@ class BillsAndLaws(models.Model):
                                           null=True)  # Field name made lowercase.
     third_reading = models.DateField(db_column='THIRD_READING', blank=True, null=True)  # Field name made lowercase.
     publication = models.DateField(db_column='PUBLICATION', blank=True, null=True)  # Field name made lowercase.
-    short_title = models.TextField(db_column='SHORT_TITLE', max_length=100, blank=True,
+    short_title = models.TextField(db_column='SHORT_TITLE', blank=True,
                                    null=True)  # Field name made lowercase.
     document = models.FileField(upload_to='files', default=timezone.now, storage=OverwriteStorage)
 
@@ -56,7 +56,7 @@ class BillsAndLaws(models.Model):
     def save(self, *args, **kwargs):
         self.document = f'{self.short_title}.pdf'.replace('/', '_').replace(') (', '_').replace(') ', '_').replace(' (',
                                                                                                                    '_').replace(
-            ', ', '_').replace(' ', '_')
+            ', ', '_').replace(' ', '_').replace(')', '_').replace('(', '_')
         self.stage = self.get_stage_key_display()
         super().save(*args, **kwargs)
 

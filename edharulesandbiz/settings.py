@@ -15,7 +15,6 @@ import os
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-import django_heroku
 from django.conf.global_settings import DATABASES
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -186,7 +185,33 @@ PWA_APP_ICONS = [
         'src': 'static/assets/img/maskable_icon_x192.png',
         'sizes': '192x192',
         'purpose': 'maskable'
+    },
+    {
+        'src': 'static/assets/img/maskable_icon_x48.png',
+        'sizes': '48x48',
+        'purpose': 'maskable'
+    },
+    {
+        'src': 'static/assets/img/maskable_icon_x72.png',
+        'sizes': '72x72',
+        'purpose': 'maskable'
+    },
+    {
+        'src': 'static/assets/img/maskable_icon_x96.png',
+        'sizes': '96x96',
+        'purpose': 'maskable'
+    },
+    {
+        'src': 'static/assets/img/maskable_icon_x128.png',
+        'sizes': '128x128',
+        'purpose': 'maskable'
+    },
+    {
+        'src': 'static/assets/img/maskable_icon_x384.png',
+        'sizes': '384x384',
+        'purpose': 'maskable'
     }
+
 ]
 PWA_APP_ICONS_APPLE = [
     {
