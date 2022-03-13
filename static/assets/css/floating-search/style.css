@@ -42,7 +42,7 @@ body {
   cursor: pointer;
 }
 .search__bar:focus {
-  width: 200px;
+  width: auto;
   left:auto;
   opacity: 1;
   cursor: text;

@@ -1,7 +1,7 @@
 {% extends 'edharules/base.html' %}
 {% load static %}
 {% block body %}
-            <div class="event__search__floater d-flex">
+            <div class="event__search__floater d-flex" style="position:fixed; right: 50px; bottom:70px;">
                 <div class="search__anchor">
                       <form id="event-search-form" action="{% url 'search' %}" method="post" class="d-flex scrollto active">
                         {% csrf_token %}
