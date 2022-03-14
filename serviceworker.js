@@ -18,13 +18,7 @@ self.addEventListener('install', function(event){
                 "./static/assets/js/signup.js",
                 "./static/assets/js/UserHome.js",
                 "./static/assets/mp4/bg1.mp4",
-                "./static/assets/js/error_404/script.js",
-                "./static/assets/js/error_500/script.js",
-                "./404.html",
-                "./500.html",
-                "./base_landing.html",
-                "./authenticate/base.html",
-                "./edharules/base.html"
+
             ]);
         })
     );
