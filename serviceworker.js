@@ -31,19 +31,13 @@ self.addEventListener('install', function(event){
 });
 
 
-self.addEventListener('fetch', function(event){
-    var requestURL = new URL(event.request.url);
-        if (requestURL.origin === location.origin){
-            if((requestURL.pathname === "./")){
-                event.respondWith(caches.match("./"));
-                return;
-            }
-        }
-        event.respondWith(
-            caches.match(event.request).then(function(response){
-                return response || fetch(event.request);
-            })
-        );
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    fetch(event.request).catch(function() {
+      return caches.match(event.request);
+    })
+  );
+});
     });
 
 
