@@ -10,7 +10,7 @@ self.addEventListener('install', function(event){
                 "./static/assets/css/floating-menu/style.css",
                 "./static/assets/css/floating-search/style.css",
                 "./static/assets/vendor/css/bootstrap.min.css",
-                "./static/assets/vendor/purecounter/purecounter.js.map",
+                "./static/assets/vendor/purecounter/purecounter.js",
                 "./static/assets/js/bootstrap.min.js",
                 "./static/assets/js/FormValidator.js",
                 "./static/assets/js/jquery-3.2.1.min.map",
@@ -19,13 +19,13 @@ self.addEventListener('install', function(event){
                 "./static/assets/js/signup.js",
                 "./static/assets/js/UserHome.js",
                 "./static/assets/mp4/bg1.mp4",
-                "./static/assets/mp4/bg1.mp4",
+                "./static/assets/js/error_404/script.js",
+                "./static/assets/js/error_500/script.js",
                 "./404.html",
                 "./500.html",
                 "./base_landing.html",
                 "./authenticate/base.html",
-                "./edharules/base.html",
-
+                "./edharules/base.html"
             ]);
         })
     );
