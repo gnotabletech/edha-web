@@ -18,6 +18,7 @@ self.addEventListener('install', function(event){
                 "./static/assets/js/signup.js",
                 "./static/assets/js/UserHome.js",
                 "./static/assets/mp4/bg1.mp4",
+                "./",
 
             ]);
         })
