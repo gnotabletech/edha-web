@@ -10,6 +10,7 @@ self.addEventListener('install', function(event){
                 "./static/assets/css/floating-menu/style.css",
                 "./static/assets/css/floating-search/style.css",
                 "./static/assets/vendor/css/bootstrap.min.css",
+                "./static/assets/vendor/purecounter/purecounter.js.map",
                 "./static/assets/js/bootstrap.min.js",
                 "./static/assets/js/FormValidator.js",
                 "./static/assets/js/jquery-3.2.1.min.map",
