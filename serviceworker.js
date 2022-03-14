@@ -14,11 +14,11 @@ self.addEventListener('install', function(event){
 
 self.addEventListener('fetch', function(event){
     var requestURL = new URL(event.request.url);
-        if (requestURL.origin === location.origin){
-            if (event.request.url.indexOf('./') !== -1){
-                return false
-            }
+
+        if (event.request.url.indexOf('./') !== -1){
+            return false
         }
+
         event.respondWith(
             caches.match(event.request).then(function(response){
                 return response || fetch(event.request);
