@@ -14,7 +14,6 @@ self.addEventListener('install', function(event){
                 "./static/assets/js/bootstrap.min.js",
                 "./static/assets/js/FormValidator.js",
                 "./static/assets/js/jquery-3.2.1.min.map",
-                "./static/assets/js/main.js",
                 "./static/assets/js/scripts.js",
                 "./static/assets/js/signup.js",
                 "./static/assets/js/UserHome.js",
