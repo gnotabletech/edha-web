@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'landing',
     'pwa',
     'rangefilter',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [

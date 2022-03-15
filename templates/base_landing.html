@@ -31,7 +31,7 @@
                 <div class="container-fluid px-4 px-lg-0 fadeIn first" data-aos="fade-left" data-aos-delay="300" data-aos-duration="1000">
                     <img src="{% static 'assets/img/Coat_of_arms_of_Nigeria.svg' %}" alt="coat of arms" class="img-fluid" width="100px" height="auto">
                 </div>
-                <div class="container-fluid px-4 px-lg-0" data-aos="fade-down" data-aos-delay="300" data-aos-duration="1000">
+                <div class="container-fluid px-4 px-lg-0" data-aos="fade-down" data-aos-delay="300" data-aos-duration="1000" data-aos-once="true">
                     <h1 class="fst-italic lh-1 text-white">Welcome to <br><h1 class="fst-normal lh-1 mb-4 text-success">Edo State House of Assembly</h1></h1>
                     <p class="mb-4 text-muted">Rules of Edo State House of Assembly App and <br>Edo State Bills and Laws Repository App</p>
                     {% block content %}
@@ -57,6 +57,33 @@
         <!-- Core theme JS-->
         <script src="{% static 'assets/js/scripts.js' %}"></script>
           <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script src="assets/js/jquery-3.2.1.js"></script>
+        <script>
+        $(document).ready(function(){
+            $("#rulesappbutton").click(function(){
+              $(this).prop("disabled", true);
+              $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading ...');
+            });
+          });
+          $(document).ready(function(){
+            $("#rulessearchbutton").click(function(){
+              $(this).prop("disabled", true);
+              $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading ...');
+            });
+          });
+          $(document).ready(function(){
+            $("#lawswappbutton").click(function(){
+              $(this).prop("disabled", true);
+              $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading ...');
+            });
+          });
+          $(document).ready(function(){
+            $("#lawssearchbutton").click(function(){
+              $(this).prop("disabled", true);
+              $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading ...');
+            });
+          });
+        </script>
           <script>
             AOS.init();
           </script>

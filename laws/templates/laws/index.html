@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 {% load underslash %}
+{% load mathfilters %}
 <html lang="en">
  
 <head>
@@ -145,6 +146,21 @@
                         </div>
                     </div>
                     {% endfor %}
+                <div class="d-flex">
+                <nav aria-label="...">
+                  <ul class="pagination justify-content-center flex-wrap">
+                    <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                      {% for page in pages %}
+                      {% if forloop.counter == 1 %}
+                      <li class="page-item"><a class="page-link" href="{% url 'laws' %}">1</a></li>
+                      {% else %}
+                    <li class="page-item"><a class="page-link" href="{% url 'next_laws' forloop.counter0|mul:10 %}">{{ forloop.counter }}<span class="sr-only"></span></a></li>
+                      {% endif %}
+                      {% endfor %}
+                    <li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
+                  </ul>
+                </nav>
+                    </div>
             </div>
         </section><!--  -->
 

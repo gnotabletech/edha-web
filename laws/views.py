@@ -15,14 +15,32 @@ from .models import BillsAndLaws, AdminInfo
 def laws_repo(request):
     if request.user.is_authenticated:
         user = request.user
-        laws = BillsAndLaws.objects.all().order_by('assent_date')
+        laws = BillsAndLaws.objects.all().order_by('assent_date')[:10]
         laws_count = BillsAndLaws.objects.all().count()
+        pages = BillsAndLaws.objects.all()[:laws_count:10]
         assented_laws_count = BillsAndLaws.objects.filter(stage='ASSENTED TO').count()
         pending_laws_count = BillsAndLaws.objects.exclude(stage='ASSENTED TO').count()
         awaiting_assent_count = BillsAndLaws.objects.filter(stage='AWAITING ASSENT').count()
         return render(request, 'laws/index.html',
                       {'user': user, 'laws': laws, 'laws_count': laws_count, 'assented_laws_count': assented_laws_count,
-                       'pending_laws_count': pending_laws_count, 'awaiting_assent_count': awaiting_assent_count})
+                       'pending_laws_count': pending_laws_count, 'awaiting_assent_count': awaiting_assent_count, 'pages': pages})
+    else:
+        return redirect('login')
+
+
+def laws_repo_more(request, last_record):
+    if request.user.is_authenticated:
+        user = request.user
+        laws = BillsAndLaws.objects.all().order_by('assent_date')[int(last_record):int(last_record) + 10]
+        laws_count = BillsAndLaws.objects.all().count()
+        pages = BillsAndLaws.objects.all()[:laws_count:10]
+        assented_laws_count = BillsAndLaws.objects.filter(stage='ASSENTED TO').count()
+        pending_laws_count = BillsAndLaws.objects.exclude(stage='ASSENTED TO').count()
+        awaiting_assent_count = BillsAndLaws.objects.filter(stage='AWAITING ASSENT').count()
+        return render(request, 'laws/index.html',
+                      {'user': user, 'laws': laws, 'laws_count': laws_count,
+                       'assented_laws_count': assented_laws_count,
+                       'pending_laws_count': pending_laws_count, 'awaiting_assent_count': awaiting_assent_count, 'pages': pages})
     else:
         return redirect('login')
 
@@ -44,4 +62,3 @@ def getlaw(request):
                        'pending_laws_count': pending_laws_count, 'awaiting_assent_count': awaiting_assent_count})
     else:
         return redirect('login_user_quicksearch')
-

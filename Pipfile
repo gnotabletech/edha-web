@@ -20,6 +20,7 @@ botocore = "==1.24.16"
 django = "*"
 django-sendgrid = "*"
 django-admin-rangefilter = "*"
+django-mathfilters = "*"
 
 [dev-packages]
 
