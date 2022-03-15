@@ -57,30 +57,34 @@
         <!-- Core theme JS-->
         <script src="{% static 'assets/js/scripts.js' %}"></script>
           <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script src="assets/js/jquery-3.2.1.js"></script>
+        <script src="{% static 'assets/js/jquery-3.2.1.js' %}"></script>
         <script>
         $(document).ready(function(){
             $("#rulesappbutton").click(function(){
               $(this).prop("disabled", true);
-              $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading ...');
+              $(this).html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading ...');
+              $("#rulesappform").submit();
             });
           });
           $(document).ready(function(){
             $("#rulessearchbutton").click(function(){
               $(this).prop("disabled", true);
-              $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading ...');
+              $(this).html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading ...');
+              $("#rulessearchform").submit();
             });
           });
           $(document).ready(function(){
             $("#lawswappbutton").click(function(){
               $(this).prop("disabled", true);
-              $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading ...');
+              $(this).html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading ...');
+              $("#lawsappform").submit();
             });
           });
           $(document).ready(function(){
             $("#lawssearchbutton").click(function(){
               $(this).prop("disabled", true);
-              $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading ...');
+              $(this).html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading ...');
+              $("#lawssearchform").submit();
             });
           });
         </script>
