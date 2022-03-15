@@ -15,7 +15,7 @@ from .models import BillsAndLaws, AdminInfo
 def laws_repo(request):
     if request.user.is_authenticated:
         user = request.user
-        laws = BillsAndLaws.objects.all().order_by('assent_date')[:10]
+        laws = BillsAndLaws.objects.all().order_by('-assent_date')[:10]
         laws_count = BillsAndLaws.objects.all().count()
         pages = BillsAndLaws.objects.all()[:laws_count:10]
         assented_laws_count = BillsAndLaws.objects.filter(stage='ASSENTED TO').count()
@@ -31,7 +31,7 @@ def laws_repo(request):
 def laws_repo_more(request, last_record):
     if request.user.is_authenticated:
         user = request.user
-        laws = BillsAndLaws.objects.all().order_by('assent_date')[int(last_record):int(last_record) + 10]
+        laws = BillsAndLaws.objects.all().order_by('-assent_date')[int(last_record):int(last_record) + 10]
         laws_count = BillsAndLaws.objects.all().count()
         pages = BillsAndLaws.objects.all()[:laws_count:10]
         assented_laws_count = BillsAndLaws.objects.filter(stage='ASSENTED TO').count()
