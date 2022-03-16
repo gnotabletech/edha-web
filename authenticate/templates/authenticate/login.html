@@ -18,7 +18,7 @@
     {% endfor %}
     {% endif %}
 
-    <form action="{% url 'login' %}" method="POST">
+    <form id="loginform" action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         <div class="form-group mb-3">
             <label for="username">Username:</label>
@@ -29,7 +29,7 @@
             <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password">
         </div>
 
-        <button type="submit" class="btn w-100 btn-success mb-3">Login</button>
+        <button id="loginbutton" type="submit" class="btn w-100 btn-success mb-3">Login</button>
 
         <h6>Forgot password? <a href="{% url 'password_reset' %}">Click Here</a> to reset</h6>
     </form>
