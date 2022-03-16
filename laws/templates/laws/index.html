@@ -20,7 +20,7 @@
     <script src="{% static 'assets/js/jquery-3.2.1.js' %}"></script>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!--<link href="{% static 'assets/css/signup.css' %}" rel="stylesheet">-->
-    <link href="{% static 'assets/css/floating-search/style.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/floating-search/style.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'assets/css/floating-menu/style.css' %}" rel="stylesheet">
     <link href="{% static 'assets/img/favicon.ico' %}" rel="icon">
     <link rel="stylesheet" href="{% static 'assets/home/vendor/aos/aos.css' %}" />
@@ -58,9 +58,8 @@
                     <div class="container-fluid">
                         <img src="{% static 'assets/img/Coat_of_arms_of_Nigeria.svg' %}"  id="brandIcon" alt="" width="30" height="24">
                         <a class="navbar-brand flex-sm-fill text-sm-center" href="{% url 'laws' %}"><h3 class="navbar-brand flex-sm-fill text-sm-center">EDHA Laws Repository</h3></a>
-
-                    <span class="navbar-text">Logged in as {{user.username}}</span>
-                    <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-text">Logged in as {{user.username}}</span>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarsExample05">
@@ -78,7 +77,7 @@
                             <input name="inputTitle" id="inputTitle" class="form-control me-2" type="search" placeholder="Search word or phrase" aria-label="Search">
                             <button id="btnSignIn" class="btn btn-outline-success" type="submit">Search</button>
                         </form>
-                    </div>-->
+                    </div>
                     </div>
                 </nav>
 

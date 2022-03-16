@@ -32,3 +32,7 @@ def error_404(request, exception):
 
 def error_500(request):
     return render(request, '500.html')
+
+
+def error_403(request):
+    return render(request, '403.html')

@@ -32,3 +32,4 @@ if settings.DEBUG:
 
 handler404 = 'landing.views.error_404'
 handler500 = 'landing.views.error_500'
+handler403 = 'landing.views.error_403'
