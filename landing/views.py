@@ -34,5 +34,5 @@ def error_500(request):
     return render(request, '500.html')
 
 
-def error_403(request):
+def error_403(request, exception):
     return render(request, '403.html')

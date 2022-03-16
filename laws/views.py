@@ -16,7 +16,7 @@ from .models import BillsAndLaws, AdminInfo
 def laws_repo(request):
     if request.user.is_authenticated:
         user = request.user
-        laws = BillsAndLaws.objects.all().order_by(F('assent_date').desc(nulls_last=True))[:10]
+        laws = BillsAndLaws.objects.all().order_by(F('assent_date').desc(nulls_last=True), F('stage_key').desc(nulls_last=True))[:10]
         laws_count = BillsAndLaws.objects.all().count()
         pages = BillsAndLaws.objects.all()[:laws_count:10]
         assented_laws_count = BillsAndLaws.objects.filter(stage='ASSENTED TO').count()

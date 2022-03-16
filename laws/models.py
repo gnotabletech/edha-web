@@ -26,6 +26,7 @@ class BillsAndLaws(models.Model):
               ('STAGE2', 'FIRST READING'),
               ('STAGE3', 'SECOND READING'),
               ('STAGE4', 'COMMITTEE STAGE'),
+              ('STAGE9', 'PUBLIC HEARING'),
               ('STAGE5', 'THIRD READING'),
               ('STAGE6', 'AWAITING ASSENT'),
               ('STAGE7', 'ASSENTED TO'),
