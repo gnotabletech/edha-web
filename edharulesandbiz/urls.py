@@ -24,6 +24,7 @@ urlpatterns = [
     path('edharules/', include('edharules.urls')),
     path('laws/', include('laws.urls')),
     path('', include('authenticate.urls'))
+
 ]
 
 if settings.DEBUG:

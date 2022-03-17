@@ -3,9 +3,7 @@ self.addEventListener('install', function(event){
     event.waitUntil(
         caches.open(staticCacheName).then(function(cache){
             return cache.addAll([
-
-                "./",
-
+                './',
             ]);
         })
     );
@@ -14,16 +12,13 @@ self.addEventListener('install', function(event){
 
 self.addEventListener('fetch', function(event){
     var requestURL = new URL(event.request.url);
-
-        if (event.request.url.indexOf('./') !== -1){
-            return false
+            if (requestURL.indexOf('./login') !== -1){
+                 event.respondWith(
+                caches.match(event.request).then(function(response){
+                    return response || fetch(event.request);
+                })
+            );
         }
-
-        event.respondWith(
-            caches.match(event.request).then(function(response){
-                return response || fetch(event.request);
-            })
-        );
     });
 
 self.addEventListener('activate', function(event) {
