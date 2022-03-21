@@ -22,6 +22,7 @@ django-admin-rangefilter = "*"
 django-mathfilters = "*"
 psycopg = {extras = ["pool"], version = "*"}
 jmespath = "==1.0.0"
+django-phonenumber-field = {extras = ["phonenumbers"], version = "*"}
 
 [dev-packages]
 

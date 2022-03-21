@@ -65,7 +65,7 @@ class BillsAndLaws(models.Model):
         return self.title
 
 
-class StaffInfo(models.Model):
+class AdminInfo(models.Model):
     ROLES = (('MP', 'MEMBER'),
              ('CH', 'CLERK OF THE HOUSE'),
              ('DCH', 'DEPUTY CLERK'),
@@ -105,79 +105,12 @@ class StaffInfo(models.Model):
                                   null=True)  # Field name made lowercase.
 
     class Meta:
-        db_table = 'StaffInfo'
+        db_table = 'AdminInfo'
         verbose_name_plural = "Staff Info"
 
     def save(self, *args, **kwargs):
         self.department = self.get_department_display()
         self.role = self.get_role_display()
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.lastname
-
-
-class MemberInfo(models.Model):
-    HIERARCHY = (('1', 'SPEAKER'),
-                 ('2', 'DEPUTY SPEAKER'),
-                 ('3', 'MAJORITY LEADER'),
-                 ('4', 'CHIEF WHIP'),
-                 ('5', 'MINORITY LEADER'),
-                 ('6', 'DEPUTY LEADER'),
-                 ('7', 'DEPUTY WHIP'),
-                 ('8', 'MEMBER'))
-    COMMITTEE = (('ADMIN', 'ADMINISTRATION AND SUPPLIES'),
-                 ('AUDIT', 'AUDIT'),
-                 ('BUDGET', 'BUDGET'),
-                 ('COMMISSION', 'COMMISSION'),
-                 ('FINANCE', 'FINANCE AND ACCOUNTS'),
-                 ('ICT', 'INFORMATION AND COMMUNICATION TECHNOLOGY'),
-                 ('INFORMATION', 'INFORMATION'),
-                 ('LEGAL', 'LEGAL SERVICES'),
-                 ('LEGISLATIVE', 'LEGISLATIVE MATTERS'),
-                 ('LIBRARY', 'LIBRARY AND ARCHIVES'),
-                 ('MANPOWER', 'MANPOWER DEVELOPMENT AND TRAINING'),
-                 ('CLERK', 'OFFICE OF THE CLERK'),
-                 ('DEPUTY_SPK', 'OFFICE OF THE DEPUTY SPEAKER'),
-                 ('SPK', 'OFFICE OF THE SPEAKER'),
-                 ('PENSIONS', 'PENSIONS AND GRATUITY'),
-                 ('PLANNING', 'PLANNING'),
-                 ('PROTOCOL', 'PROTOCOL AND TRAVELS'),
-                 ('PUB', 'PUBLICATIONS'),
-                 ('RESEARCH', 'RESEARCH AND STATISTICS'),
-                 ('WORKS', 'WORKS AND TECHNICAL SERVICES'))
-    id = models.AutoField(primary_key=True)  # Field name made lowercase.
-    firstname = models.CharField(max_length=50)  # Field name made lowercase.
-    lastname = models.CharField(max_length=50)  # Field name made lowercase.
-    username = models.CharField(unique=True, max_length=20)  # Field name made lowercase.
-    position = models.CharField(max_length=15, choices=HIERARCHY)  # Field name made lowercase.
-    position_key = models.CharField(choices=HIERARCHY, default='8')  # Field name made lowercase.
-    qualifications = models.CharField(max_length=50)  # Field name made lowercase.
-    constituency = models.CharField(max_length=50)  # Field name made lowercase.
-    lga = models.CharField(max_length=50)  # Field name made lowercase.
-    date_of_birth = models.CharField(max_length=50)  # Field name made lowercase.
-    age = models.CharField(max_length=50)  # Field name made lowercase.
-    profile_description = models.CharField(max_length=50)  # Field name made lowercase.
-    tenure = models.CharField(max_length=50)  # Field name made lowercase.
-    party = models.CharField(max_length=50)  # Field name made lowercase.
-    tenure_start = models.CharField(max_length=50)  # Field name made lowercase.
-    email = models.CharField(max_length=50)  # Field name made lowercase.
-    projects = models.CharField(max_length=50)  # Field name made lowercase.
-    status = models.CharField(max_length=50)  # Field name made lowercase.
-    committee = models.CharField(max_length=50, choices=COMMITTEE, default='ADMIN', blank=True, null=True)
-    twitter_account = models.CharField(max_length=50)  # Field name made lowercase.
-    facebook_account = models.CharField(max_length=50)  # Field name made lowercase.
-    instagram_account = models.CharField(max_length=50)  # Field name made lowercase.
-    linkedin_account = models.CharField(max_length=50)  # Field name made lowercase.
-    phone = models.CharField(max_length=13)  # Field name made lowercase.
-
-    class Meta:
-        db_table = 'MemberInfo'
-        verbose_name_plural = "Member Info"
-
-    def save(self, *args, **kwargs):
-        self.committee = self.get_department_display()
-        self.position = self.get_role_display()
         super().save(*args, **kwargs)
 
     def __str__(self):

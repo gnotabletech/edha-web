@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'pwa',
     'rangefilter',
     'mathfilters',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [

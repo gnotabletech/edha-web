@@ -1,15 +1,7 @@
-import os
-
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.db.models import F
-from django.http import FileResponse
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
 
-from edharulesandbiz.settings import BASE_DIR
-from .models import BillsAndLaws, AdminInfo
+from .models import BillsAndLaws
 
 
 # Create your views here.
