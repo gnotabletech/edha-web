@@ -120,18 +120,18 @@ h2 {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
   background: #fff;
-  padding: 30px;
+  padding: 60px;
+  justify-content: center;
   width: 100%;
   max-width: 450px;
   position: relative;
-  padding: 0px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
 }
 
 #formFooter {
-  background-color: #f6f6f6;
+  background-color: #fff;
   border-top: 1px solid #dce8f1;
   padding: 25px;
   text-align: center;
@@ -190,12 +190,12 @@ input[type=text], input[type=password], option, select {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
-  padding: 15px 15px;
-  text-align: left;
+  padding: 15px;
+  text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 5px;
+
   width: 100%;
   border: 2px solid #f6f6f6;
   -webkit-transition: all 0.5s ease-in-out;

@@ -5,31 +5,33 @@
 
 <div class="wrapper">
       <div id="formContent">
-<div class="text-center mt-4 text-muted">
-    <h2>Member/Staff Login</h2>
-</div>
- <div class="fadeIn first text-center mb-3 mt-3">
-        <img src="{% static 'assets/img/Coat_of_arms_of_Nigeria.svg' %}" alt="" class="img-fluid" width="100px">
-    </div>
-
-    {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        {{ message }}
-    </div>
-    {% endfor %}
-    {% endif %}
-
-    <form id="loginform" action="{% url 'login' %}" method="POST">
-        {% csrf_token %}
-        <div class="form-signin">
-            <input type="text" name="username" id="username" placeholder="Enter Username">
-            <input type="password" class="form-control mb-3" name="password" id="password" placeholder="Enter Password">
-            <button id="loginbutton" type="submit" class="btn w-100 btn-success text-center">Login</button>
+        <div class="text-center mt-4 text-muted">
+            <h2>Member/Staff Login</h2>
         </div>
-        <h6 class="text-center">Forgot password? <a href="{% url 'password_reset' %}">Click Here</a> to reset</h6>
-    </form>
-</div>
+            <div class="fadeIn first text-center mb-3 mt-3">
+                <img src="{% static 'assets/img/Coat_of_arms_of_Nigeria.svg' %}" alt="" class="img-fluid" width="100px">
+            </div>
+
+            {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% endif %}
+
+            <form id="loginform" action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-signin">
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username">
+                    <input type="password" class="form-control mb-3" name="password" id="password" placeholder="Enter Password">
+                    <button id="loginbutton" type="submit" class="btn w-100 btn-success">Login</button>
+                </div>
+            </form>
+          <div id="formFooter">
+                    <h6 class="text-center">Forgot password? <a href="{% url 'password_reset' %}">Click Here</a> to reset</h6>
+                </div>
+      </div>
 </div>
 {% endblock content %}

@@ -9,15 +9,28 @@ def authentication_home(request):
 
 
 def login_user(request):
+    sender = request.session.get('sender')
+    if request.user.is_authenticated:
+        if sender == "website":
+            if request.user.is_authenticated:
+                return redirect('member_area')
+        else:
+            if request.user.is_authenticated:
+                return redirect('laws')
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
-            messages.success(request, 'You have been logged in successfully')
-            return redirect('laws')
+            if sender == "website":
+                login(request, user)
+                # messages.success(request, 'You have been logged in successfully')
+                return redirect('member_area')
+            else:
+                login(request, user)
+                # messages.success(request, 'You have been logged in successfully')
+                return redirect('laws')
         else:
             messages.warning(request, "Username or Password is incorrect !!")
             return redirect('login')
