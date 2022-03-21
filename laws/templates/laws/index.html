@@ -70,7 +70,6 @@
                             <li class="nav-item active">
                             <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'logout' %}">Logout</a>
                           </li>
-                           <a class="nav-link" href="wishlist">Search Laws</a>
                         </ul>
                         <form class="d-flex" action="{% url 'getlaw' %}" method="post">
                             {% csrf_token %}
