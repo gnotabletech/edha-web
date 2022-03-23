@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from edharulesandbiz import settings
+from landing.models import MemberInfo
 
 
 def service_worker(request):
@@ -49,12 +50,23 @@ def appstart(request):
     return render(request, 'index.html')
 
 
-def portfolio(request):
-    return render(request, 'portfolio.html')
+def portfolio(request, constituency):
+    member = MemberInfo.objects.get(constituency=constituency)
+    if member.othernames is None:
+        member.othernames = ''
+    return render(request, 'portfolio.html', {'member': member})
 
 
 def member_area(request):
-    return render(request, 'member_area.html')
+    if request.user.is_authenticated:
+        user = request.user
+        member = MemberInfo.objects.get(username=user.username)
+        if member.othernames is None:
+            member.othernames = ''
+        return render(request, 'member_area.html', {'member': member})
+
+    else:
+        return redirect('login')
 
 
 def route(request, sender):

@@ -94,7 +94,8 @@ class MemberInfo(models.Model):
               ('4', 'SUSPENDED'),
               ('5', 'IMPEACHED'),
               ('6', 'VACATED'),
-              ('7', 'NULLIFIED'))
+              ('7', 'NULLIFIED'),
+              ('8', 'PENDING'))
     LGA = (('1', 'AKOKO-EDO'),
            ('2', 'EGOR'),
            ('3', 'ESAN CENTRAL'),
@@ -137,30 +138,53 @@ class MemberInfo(models.Model):
                       ('22', 'OWAN EAST'),
                       ('23', 'OWAN WEST'),
                       ('24', 'UHUNMWODE'))
+    TENURE = (('1st', 'FIRST'),
+              ('2nd', 'SECOND'),
+              ('3rd', 'THIRD'),
+              ('4th', 'FOURTH'))
+    PARTY = (('PDP', 'PEOPLES DEMOCRATIC PARTY'),
+             ('APC', 'ALL PROGRESSIVES CONGRESS'),
+             ('APGA', 'ALL PROGRESSIVES GRAND ALLIANCE'),
+             ('YPP', 'YOUNG PROGRESSIVES PARTY'),
+             ('ADC', 'AFRICAN DEMOCRATIC CONGRESS'),
+             ('PRP', 'PEOPLES REDEMPTION PARTY'),
+             ('ZLP', 'ZENITH LABOUR PARTY'),
+             ('ADP', 'ACTION DEMOCRATIC PARTY'),
+             ('NNPP', 'NEW NIGERIA PEOPLES PARTY'),
+             ('A', 'ACCORD PARTY'),
+             ('AA', 'ACTION ALLIANCE'),
+             ('AAC', 'AFRICAN ACTION CONGRESS'),
+             ('APP', 'ALLIED PEOPLES PARTY'),
+             ('BP', 'BOOT PARTY'),
+             ('LP', 'LABOUR PARTY'),
+             ('NRM', 'NATIONAL RESCUE MOVEMENT'),
+             ('SDP', 'SOCIAL DEMOCRATIC PARTY'))
     id = models.AutoField(primary_key=True)
-    firstname = models.CharField(max_length=50)
-    lastname = models.CharField(max_length=50)
-    username = models.CharField(unique=True, max_length=20)
+    firstname = models.CharField(max_length=50, blank=True, null=True)
+    lastname = models.CharField(max_length=50, blank=True, null=True)
+    othernames = models.CharField(max_length=50, blank=True, null=True)
+    username = models.CharField(unique=True, max_length=20, blank=True, null=True)
     position = models.CharField(max_length=15, choices=HIERARCHY, default='8')
-    position_key = models.IntegerField(choices=HIERARCHY, default='8')
-    qualifications = models.CharField(max_length=50)
-    constituency = models.CharField(max_length=50, choices=CONSTITUENCIES, default='1')
-    lga = models.CharField(max_length=50, choices=LGA, default='1')
-    date_of_birth = models.DateField()
-    age = models.IntegerField()
-    profile_description = models.CharField(max_length=50)
-    tenure = models.CharField(max_length=50)
-    party = models.CharField(max_length=50)
+    position_key = models.CharField(max_length=1, choices=HIERARCHY, default='8')
+    qualifications = models.CharField(max_length=50, blank=True, null=True)
+    constituency = models.CharField(max_length=50, unique=True, default='1')
+    lga = models.CharField(max_length=50, choices=LGA, default='1', blank=True, null=True)
+    date_of_birth = models.DateField(blank=True, null=True)
+    age = models.IntegerField(blank=True, null=True)
+    profile_description = models.CharField(max_length=50, blank=True, null=True)
+    tenure = models.CharField(max_length=3, choices=TENURE, blank=True, null=True)
+    party = models.CharField(max_length=150, choices=PARTY, blank=True, null=True)
+    party_key = models.CharField(max_length=4, choices=PARTY, blank=True, null=True)
     tenure_start = models.DateField(default=timezone.now)
-    email = models.EmailField()
-    projects = models.TextField(max_length=150)
+    email = models.EmailField(blank=True, null=True)
+    projects = models.TextField(max_length=150, blank=True, null=True)
     status = models.CharField(max_length=11, choices=STATUS, default='1')
     committee = models.CharField(max_length=50, choices=COMMITTEE, default='SP1', blank=True, null=True)
     committee_key = models.CharField(max_length=4, choices=COMMITTEE, default='SP1', blank=True, null=True)
-    twitter_account = models.CharField(max_length=50)
-    facebook_account = models.CharField(max_length=50)
-    instagram_account = models.CharField(max_length=50)
-    linkedin_account = models.CharField(max_length=50)
+    twitter_account = models.CharField(max_length=50, blank=True, null=True)
+    facebook_account = models.CharField(max_length=50, blank=True, null=True)
+    instagram_account = models.CharField(max_length=50, blank=True, null=True)
+    linkedin_account = models.CharField(max_length=50, blank=True, null=True)
     phone = PhoneNumberField(null=True, blank=True)
 
     class Meta:
@@ -170,7 +194,10 @@ class MemberInfo(models.Model):
     def save(self, *args, **kwargs):
         self.committee = self.get_committee_display()
         self.position = self.get_position_display()
+        self.party = self.get_party_display()
+        # self.constituency = self.get_constituency_display()
+        # self.username = self.username.lower()
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.lastname
+        return self.constituency

@@ -10,6 +10,7 @@ class EDHARule(models.Model):
     rule_details = models.TextField()
 
     class Meta:
+        verbose_name_plural = 'EDHA Rules'
         ordering = ['rule_section_num', 'rule_subsection_num']
 
     def __str__(self):
