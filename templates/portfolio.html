@@ -46,7 +46,11 @@
     <div class="d-flex flex-column">
 
       <div class="profile">
-        <img src="{{ member.profile_image.url }}" alt="{{ member.profile_image.name }}" class="img-fluid rounded-circle">
+        {% if member.profile_image %}
+            <img src="{{ member.profile_image.url }}" alt="{{ member.profile_image.name }}" class="img-fluid rounded-circle">
+        {% else %}
+            <img src="{% static 'assets/home/img/default_profile.jpg' %}" alt="" class="img-fluid rounded-circle">
+        {% endif %}
         <h1 class="text-light"><a href="index.html">Hon. {{ member.firstname|title }} {{ member.lastname|title }}</a></h1>
         <div class="social-links mt-3 text-center">
           <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
