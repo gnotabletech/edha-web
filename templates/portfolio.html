@@ -97,7 +97,11 @@
 
         <div class="row">
           <div class="col-lg-4" data-aos="fade-right">
-            <img src="{{ member.profile_image.url }}" class="img-fluid" alt="{{ member.profile_image.name }}">
+            {% if member.profile_image %}
+              <img src="{{ member.profile_image.url }}" class="img-fluid" alt="{{ member.profile_image.name }}">
+            {% else %}
+              <img src="{% static 'assets/home/img/default_profile.jpg' %}" alt="" class="img-fluid">
+            {% endif %}
           </div>
           <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
             <h3>{{ member.position|title }} of the House</h3>

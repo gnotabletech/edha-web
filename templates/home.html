@@ -162,10 +162,9 @@
                         <div class="about-col">
                           <div class="img">
                             {% if member.public_image %}
-
                               <img src="{{ member.public_image.url }}" alt="{{ member.public_image.name }}" class="img-fluid">
                             {% else %}
-                              <img src="{% static 'assets/home/img/ESAN_WEST.jpg' %}" alt="" class="img-fluid">
+                              <img src="{% static 'assets/home/img/default_public.jpg' %}" alt="" class="img-fluid">
                             {% endif %}
                             <div class="icon"><i class="bi bi-bar-chart"></i></div>
                           </div>
