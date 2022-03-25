@@ -11,7 +11,7 @@ class MemberInfoAdmin(admin.ModelAdmin):
     fields = ['firstname', 'lastname', 'othernames', 'username', 'constituency', 'lga', 'position_key', 'qualifications',
               'date_of_birth', 'age', 'profile_description', 'tenure', 'party', 'tenure_start', 'email', 'projects',
               'status', 'committee_key', 'twitter_account', 'facebook_account', 'instagram_account', 'linkedin_account',
-              'phone']
+              'phone', 'profile_image', 'public_image', 'cover_image']
 
     def has_add_permission(self, request, obj=None):
         return False

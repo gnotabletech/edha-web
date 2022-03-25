@@ -186,6 +186,9 @@ class MemberInfo(models.Model):
     instagram_account = models.CharField(max_length=50, blank=True, null=True)
     linkedin_account = models.CharField(max_length=50, blank=True, null=True)
     phone = PhoneNumberField(null=True, blank=True)
+    profile_image = models.ImageField(upload_to='profile/', blank=True)
+    cover_image = models.ImageField(upload_to='profile/', blank=True)
+    public_image = models.ImageField(upload_to='profile/', blank=True)
 
     class Meta:
         db_table = 'MemberInfo'
@@ -195,6 +198,9 @@ class MemberInfo(models.Model):
         self.committee = self.get_committee_display()
         self.position = self.get_position_display()
         self.party = self.get_party_display()
+        self.public_image = f'media/profile/{self.constituency}_public.jpg'.replace(' ', '_').lower()
+        self.profile_image = f'media/profile/{self.constituency}_profile.jpg'.replace(' ', '_').lower()
+        self.cover_image = f'media/profile/{self.constituency}_cover.jpg'.replace(' ', '_').lower()
         # self.constituency = self.get_constituency_display()
         # self.username = self.username.lower()
         super().save(*args, **kwargs)

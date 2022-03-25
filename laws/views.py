@@ -45,7 +45,7 @@ def getlaw(request):
     if request.user.is_authenticated:
         request.session.get('searchstring')
         user = request.user
-        laws = BillsAndLaws.objects.filter(title__icontains=request.session.get('searchstring')).order_by('assent_date')
+        laws = BillsAndLaws.objects.filter(title__icontains=request.session.get('searchstring')).order_by(F('assent_date').desc(nulls_last=True), F('stage_key').desc(nulls_last=True))
         laws_count = BillsAndLaws.objects.all().count()
         assented_laws_count = BillsAndLaws.objects.filter(stage='ASSENTED TO').count()
         pending_laws_count = BillsAndLaws.objects.exclude(stage='ASSENTED TO').count()

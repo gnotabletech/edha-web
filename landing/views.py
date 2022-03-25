@@ -1,3 +1,5 @@
+import os
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
@@ -43,7 +45,14 @@ def login_user(request):
 
 # Create your views here.
 def index(request):
-    return render(request, 'home.html')
+    path = settings.MEDIA_ROOT
+    img_list = os.listdir(path + '/profile')
+
+    members = []
+    for x in range(8):
+        members.append(MemberInfo.objects.all().order_by('position_key')[x*3:(x+1)*3])
+
+    return render(request, 'home.html', {'members': members, 'images': img_list})
 
 
 def appstart(request):
