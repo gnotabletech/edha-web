@@ -8,6 +8,7 @@ urlpatterns = [
     path('appstart', views.appstart, name='appstart'),
     path('route/<sender>', views.route, name='route'),
     path('news', views.news, name='news'),
+    path('news_detail', views.news_detail, name='news_detail'),
     path('member_area', views.member_area, name='member_area'),
     path('portfolio/<constituency>', views.portfolio, name='portfolio'),
     re_path(r'^serviceworker\.js$', views.service_worker, name='serviceworker'),

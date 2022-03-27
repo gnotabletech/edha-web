@@ -56,7 +56,8 @@ def index(request):
                                                F('stage_key').desc(nulls_last=True))[:6]
     passed_laws = (BillsAndLaws.objects.filter(stage_key__endswith='5') | BillsAndLaws.objects.filter(
         stage_key__endswith='6') | BillsAndLaws.objects.filter(stage_key__endswith='7')).count()
-    awaiting_assent = (BillsAndLaws.objects.filter(stage_key__endswith='6')|BillsAndLaws.objects.filter(stage_key__endswith='5')).count()
+    awaiting_assent = (BillsAndLaws.objects.filter(stage_key__endswith='6') | BillsAndLaws.objects.filter(
+        stage_key__endswith='5')).count()
     signed_laws = BillsAndLaws.objects.filter(stage='ASSENTED TO').count()
     signed_laws_percent = round((signed_laws / BillsAndLaws.objects.all().count()) * 100)
     passed_laws_percent = round((passed_laws / BillsAndLaws.objects.all().count()) * 100)
@@ -118,3 +119,7 @@ def error_403(request, exception):
 
 def news(request):
     return render(request, 'blog.html')
+
+
+def news_detail(request):
+    return render(request, 'blog-single.html')

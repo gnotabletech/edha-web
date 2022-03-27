@@ -33,3 +33,7 @@ if settings.DEBUG:
 handler404 = 'landing.views.error_404'
 handler500 = 'landing.views.error_500'
 handler403 = 'landing.views.error_403'
+
+admin.site.site_header = "EDHA E-Parliament/Website Administration"
+admin.site.site_title = "EDHA E-Parliament/Website Administration"
+admin.site.index_title = "EDHA E-Parliament/Website Administration"
