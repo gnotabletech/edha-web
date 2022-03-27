@@ -2,11 +2,13 @@ import os
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.db.models import F
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from edharulesandbiz import settings
 from landing.models import MemberInfo
+from laws.models import BillsAndLaws
 
 
 def service_worker(request):
@@ -49,9 +51,20 @@ def index(request):
     login_status = request.session.get('login_status')
     members = []
     for x in range(8):
-        members.append(MemberInfo.objects.all().order_by('position_key')[x*3:(x+1)*3])
-
-    return render(request, 'home.html', {'members': members, 'login_status': login_status})
+        members.append(MemberInfo.objects.all().order_by('position_key')[x * 3:(x + 1) * 3])
+    laws = BillsAndLaws.objects.all().order_by(F('assent_date').desc(nulls_last=True),
+                                               F('stage_key').desc(nulls_last=True))[:6]
+    passed_laws = (BillsAndLaws.objects.filter(stage_key__endswith='5') | BillsAndLaws.objects.filter(
+        stage_key__endswith='6') | BillsAndLaws.objects.filter(stage_key__endswith='7')).count()
+    awaiting_assent = (BillsAndLaws.objects.filter(stage_key__endswith='6')|BillsAndLaws.objects.filter(stage_key__endswith='5')).count()
+    signed_laws = BillsAndLaws.objects.filter(stage='ASSENTED TO').count()
+    signed_laws_percent = round((signed_laws / BillsAndLaws.objects.all().count()) * 100)
+    passed_laws_percent = round((passed_laws / BillsAndLaws.objects.all().count()) * 100)
+    print(passed_laws_percent)
+    return render(request, 'home.html', {'members': members, 'login_status': login_status, 'laws': laws,
+                                         'passed_laws_percent': passed_laws_percent,
+                                         'signed_laws_percent': signed_laws_percent, 'signed_laws': signed_laws,
+                                         'passed_laws': passed_laws, 'awaiting_assent': awaiting_assent})
 
 
 def appstart(request):
