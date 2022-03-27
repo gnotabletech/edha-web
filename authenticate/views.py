@@ -26,10 +26,12 @@ def login_user(request):
             if sender == "website":
                 login(request, user)
                 # messages.success(request, 'You have been logged in successfully')
+                request.session['login_status'] = True
                 return redirect('member_area')
             else:
                 login(request, user)
                 # messages.success(request, 'You have been logged in successfully')
+                request.session['login_status'] = True
                 return redirect('laws')
         else:
             messages.warning(request, "Username or Password is incorrect !!")
@@ -47,7 +49,8 @@ def login_user_quicksearch(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, 'You have been logged in successfully')
+            # messages.success(request, 'You have been logged in successfully')
+            request.session['login_status'] = True
             return redirect('getlaw')
         else:
             messages.warning(request, "Username or Password is incorrect !!")
@@ -58,7 +61,8 @@ def login_user_quicksearch(request):
 
 def logout_user(request):
     logout(request)
-    messages.success(request, "Logged out successfully")
+    # messages.success(request, "Logged out successfully")
+    request.session['login_status'] = False
     return redirect('home')
 
 

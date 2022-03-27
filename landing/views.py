@@ -46,11 +46,12 @@ def login_user(request):
 # Create your views here.
 def index(request):
     path = settings.MEDIA_ROOT
+    login_status = request.session.get('login_status')
     members = []
     for x in range(8):
         members.append(MemberInfo.objects.all().order_by('position_key')[x*3:(x+1)*3])
 
-    return render(request, 'home.html', {'members': members})
+    return render(request, 'home.html', {'members': members, 'login_status': login_status})
 
 
 def appstart(request):
@@ -67,10 +68,15 @@ def portfolio(request, constituency):
 def member_area(request):
     if request.user.is_authenticated:
         user = request.user
-        member = MemberInfo.objects.get(username=user.username)
-        if member.othernames is None:
-            member.othernames = ''
-        return render(request, 'member_area.html', {'member': member})
+
+        if user.username.startswith('hon.'):
+            member = MemberInfo.objects.get(username=user.username)
+            if member.othernames is None:
+                member.othernames = ''
+            return render(request, 'member_area.html', {'member': member})
+        else:
+            # messages.warning(request, "You don't have the required permissions for this page")
+            return redirect('home')
 
     else:
         return redirect('login')
