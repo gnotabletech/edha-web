@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from django.contrib.auth.admin import UserAdmin
 
-from landing.models import MemberInfo, StaffInfo
+from landing.models import MemberInfo, StaffInfo, Resume, News, Resources
 
 
 class MemberInfoAdmin(admin.ModelAdmin):
@@ -26,3 +26,6 @@ class StaffInfoAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(StaffInfo, StaffInfoAdmin)
 admin.site.register(MemberInfo, MemberInfoAdmin)
+admin.site.register(Resume)
+admin.site.register(News)
+admin.site.register(Resources)

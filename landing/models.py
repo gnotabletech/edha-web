@@ -1,9 +1,11 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, User
 from django.db import models
 
 # Create your models here.
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
+
+from laws.models import OverwriteStorage
 
 
 class StaffInfo(models.Model):
@@ -35,9 +37,9 @@ class StaffInfo(models.Model):
                    ('RESEARCH', 'RESEARCH AND STATISTICS'),
                    ('WORKS', 'WORKS AND TECHNICAL SERVICES'))
     id = models.AutoField(db_column='ID', primary_key=True)
-    firstname = models.CharField(db_column='FirstName', max_length=50)
-    lastname = models.CharField(db_column='LastName', max_length=50)
-    username = models.CharField(db_column='Username', unique=True, max_length=20)
+    # firstname = models.CharField(db_column='FirstName', max_length=50)
+    # lastname = models.CharField(db_column='LastName', max_length=50)
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
     designation = models.CharField(db_column='Designation', max_length=50)
     role = models.CharField(db_column='Role', max_length=50, choices=ROLES, default='MP')
     department = models.CharField(db_column='Department', max_length=50, choices=DEPARTMENTS, default='ADMIN',
@@ -53,7 +55,7 @@ class StaffInfo(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.lastname
+        return self.username
 
 
 class MemberInfo(models.Model):
@@ -160,15 +162,15 @@ class MemberInfo(models.Model):
              ('LP', 'LABOUR PARTY'),
              ('NRM', 'NATIONAL RESCUE MOVEMENT'),
              ('SDP', 'SOCIAL DEMOCRATIC PARTY'))
-    id = models.AutoField(primary_key=True)
+    # id = models.AutoField(primary_key=True)
     firstname = models.CharField(max_length=50, blank=True, null=True)
     lastname = models.CharField(max_length=50, blank=True, null=True)
     othernames = models.CharField(max_length=50, blank=True, null=True)
-    username = models.CharField(unique=True, max_length=20, blank=True, null=True)
+    username = models.CharField(unique=True, max_length=25)
     position = models.CharField(max_length=15, choices=HIERARCHY, default='8')
     position_key = models.CharField(max_length=1, choices=HIERARCHY, default='8')
     qualifications = models.CharField(max_length=50, blank=True, null=True)
-    constituency = models.CharField(max_length=50, unique=True, default='1')
+    constituency = models.CharField(primary_key=True, max_length=50, unique=True, default='1')
     lga = models.CharField(max_length=50, choices=LGA, default='1', blank=True, null=True)
     date_of_birth = models.DateField(blank=True, null=True)
     age = models.IntegerField(blank=True, null=True)
@@ -193,7 +195,7 @@ class MemberInfo(models.Model):
 
     class Meta:
         db_table = 'MemberInfo'
-        verbose_name_plural = "Member Info"
+        verbose_name_plural = "Members Info"
 
     def save(self, *args, **kwargs):
         self.committee = self.get_committee_display()
@@ -208,3 +210,181 @@ class MemberInfo(models.Model):
 
     def __str__(self):
         return self.constituency
+
+
+class Resume(models.Model):
+    DEGREE = (('FSLC', 'FIRST SCHOOL LEAVING CERTIFICATE'),
+              ('SSCE', 'SENIOR SCHOOL CERTIFICATE'),
+              ('OND', 'ORDINARY NATIONAL DIPLOMA'),
+              ('HND', 'HIGHER NATIONAL DIPLOMA'),
+              ('B.SC', 'BACHELOR OF SCIENCE'),
+              ('BPA', 'BACHELORS IN PUBLIC ADMINISTRATION'),
+              ('BA', 'BACHELOR OF ARTS'),
+              ('MBA', 'MASTER OF BUSINESS ADMINISTRATION'),
+              ('MPA', 'MASTERS IN PUBLIC ADMINISTRATION'),
+              ('B.Ed', 'BACHELOR OF EDUCATION'),
+              ('M.Ed', 'MASTER OF EDUCATION'),
+              ('B.Eng', 'BACHELOR OF ENGINEERING'),
+              ('M.Eng', 'MASTER OF ENGINEERING'),
+              ('LL.B', 'BACHELOR OF LAWS'),
+              ('LL.M', 'MASTER OF LAWS'),
+              ('PGD', 'POSTGRADUATE DIPLOMA'),
+              ('B.Tech', 'BACHELOR OF TECHNOLOGY'),
+              ('M.Tech', 'MASTER OF TECHNOLOGY'),
+              ('B.Pharm', 'BACHELOR OF PHARMACY'),
+              ('M.Pharm', 'MASTER OF PHARMACY'),
+              ('P.hD', 'DOCTOR OF PHILOSOPHY'),)
+
+    id = models.AutoField(primary_key=True)
+    # firstname = models.CharField(max_length=50, blank=True, null=True)
+    # lastname = models.CharField(max_length=50, blank=True, null=True)
+    # othernames = models.CharField(max_length=50, blank=True, null=True)
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    degree_1 = models.CharField(max_length=50, choices=DEGREE, default='SSCE')
+    course_1 = models.CharField(max_length=50, blank=True)
+    institution_1 = models.CharField(max_length=100, blank=True)
+    degree_1_key = models.CharField(max_length=7, choices=DEGREE, default='SSCE')
+    degree_1_date = models.DateField(blank=True, null=True)
+    degree_2 = models.CharField(max_length=50, choices=DEGREE, default='SSCE')
+    course_2 = models.CharField(max_length=50, blank=True)
+    institution_2 = models.CharField(max_length=100, blank=True)
+    degree_2_key = models.CharField(max_length=7, choices=DEGREE, default='SSCE')
+    degree_2_date = models.DateField(blank=True, null=True)
+    degree_3 = models.CharField(max_length=50, choices=DEGREE, default='SSCE')
+    course_3 = models.CharField(max_length=50, blank=True)
+    institution_3 = models.CharField(max_length=100, blank=True)
+    degree_3_key = models.CharField(max_length=7, choices=DEGREE, default='SSCE')
+    degree_3_date = models.DateField(blank=True, null=True)
+    experience_1 = models.CharField(max_length=50, blank=True, null=True)
+    experience_1_office = models.CharField(max_length=50, blank=True, null=True)
+    experience_1_duty = models.TextField()
+    experience_1_date = models.DateField(blank=True, null=True)
+    experience_2 = models.CharField(max_length=50, blank=True, null=True)
+    experience_2_office = models.CharField(max_length=50, blank=True, null=True)
+    experience_2_duty = models.TextField()
+    experience_2_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        db_table = 'Resume'
+        verbose_name_plural = "Resumes"
+
+    def save(self, *args, **kwargs):
+        self.degree_1 = self.get_degree_1_display()
+        self.degree_2 = self.get_degree_2_display()
+        self.degree_3 = self.get_degree_3_display()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.username
+
+
+class MemberResume(models.Model):
+    DEGREE = (('FSLC', 'FIRST SCHOOL LEAVING CERTIFICATE'),
+              ('SSCE', 'SENIOR SCHOOL CERTIFICATE'),
+              ('OND', 'ORDINARY NATIONAL DIPLOMA'),
+              ('HND', 'HIGHER NATIONAL DIPLOMA'),
+              ('B.SC', 'BACHELOR OF SCIENCE'),
+              ('BPA', 'BACHELORS IN PUBLIC ADMINISTRATION'),
+              ('BA', 'BACHELOR OF ARTS'),
+              ('MBA', 'MASTER OF BUSINESS ADMINISTRATION'),
+              ('MPA', 'MASTERS IN PUBLIC ADMINISTRATION'),
+              ('B.Ed', 'BACHELOR OF EDUCATION'),
+              ('M.Ed', 'MASTER OF EDUCATION'),
+              ('B.Eng', 'BACHELOR OF ENGINEERING'),
+              ('M.Eng', 'MASTER OF ENGINEERING'),
+              ('LL.B', 'BACHELOR OF LAWS'),
+              ('LL.M', 'MASTER OF LAWS'),
+              ('PGD', 'POSTGRADUATE DIPLOMA'),
+              ('B.Tech', 'BACHELOR OF TECHNOLOGY'),
+              ('M.Tech', 'MASTER OF TECHNOLOGY'),
+              ('B.Pharm', 'BACHELOR OF PHARMACY'),
+              ('M.Pharm', 'MASTER OF PHARMACY'),
+              ('P.hD', 'DOCTOR OF PHILOSOPHY'),)
+
+    id = models.AutoField(primary_key=True)
+    # firstname = models.CharField(max_length=50, blank=True, null=True)
+    # lastname = models.CharField(max_length=50, blank=True, null=True)
+    # othernames = models.CharField(max_length=50, blank=True, null=True)
+    constituency = models.OneToOneField(MemberInfo, on_delete=models.CASCADE, unique=True, default='1')
+    degree_1 = models.CharField(max_length=50, choices=DEGREE, default='SSCE', blank=True, null=True)
+    course_1 = models.CharField(max_length=50, blank=True, null=True)
+    institution_1 = models.CharField(max_length=100, blank=True, null=True)
+    degree_1_key = models.CharField(max_length=7, choices=DEGREE, default='SSCE', blank=True, null=True)
+    degree_1_date = models.DateField(blank=True, null=True)
+    degree_2 = models.CharField(max_length=50, choices=DEGREE, default='SSCE', blank=True, null=True)
+    course_2 = models.CharField(max_length=50, blank=True, null=True)
+    institution_2 = models.CharField(max_length=100, blank=True, null=True)
+    degree_2_key = models.CharField(max_length=7, choices=DEGREE, default='SSCE', blank=True, null=True)
+    degree_2_date = models.DateField(blank=True, null=True)
+    degree_3 = models.CharField(max_length=50, choices=DEGREE, default='SSCE', blank=True, null=True)
+    course_3 = models.CharField(max_length=50, blank=True, null=True)
+    institution_3 = models.CharField(max_length=100, blank=True, null=True)
+    degree_3_key = models.CharField(max_length=7, choices=DEGREE, default='SSCE', blank=True, null=True)
+    degree_3_date = models.DateField(blank=True, null=True)
+    experience_1 = models.CharField(max_length=50, blank=True, null=True)
+    experience_1_office = models.CharField(max_length=50, blank=True, null=True)
+    experience_1_duty = models.TextField(blank=True, null=True)
+    experience_1_date = models.DateField(blank=True, null=True)
+    experience_2 = models.CharField(max_length=50, blank=True, null=True)
+    experience_2_office = models.CharField(max_length=50, blank=True, null=True)
+    experience_2_duty = models.TextField(blank=True, null=True)
+    experience_2_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        db_table = 'MemberResume'
+        verbose_name_plural = "Members Resumes"
+
+    def save(self, *args, **kwargs):
+        self.degree_1 = self.get_degree_1_display()
+        self.degree_2 = self.get_degree_2_display()
+        self.degree_3 = self.get_degree_3_display()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.username
+
+
+class News(models.Model):
+    id = models.AutoField(primary_key=True)
+    # firstname = models.CharField(max_length=50, blank=True, null=True)
+    # lastname = models.CharField(max_length=50, blank=True, null=True)
+    # othernames = models.CharField(max_length=50, blank=True, null=True)
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    news_date = models.DateField(blank=True, null=True)
+    news_title = models.CharField(max_length=50, blank=True, null=True)
+    news_details = models.TextField(blank=True, null=True)
+    desc_photo = models.CharField(max_length=50, default='1', blank=True, null=True)
+
+    class Meta:
+        db_table = 'News'
+        verbose_name_plural = "News"
+
+    def save(self, *args, **kwargs):
+        self.desc_photo = f'{self.news_title}_{self.news_date}'
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.news_title
+
+
+class Resources(models.Model):
+    id = models.AutoField(primary_key=True)
+    vp_date = models.DateField(blank=True, null=True)
+    vp_file = models.FileField(upload_to='files', default=timezone.now, storage=OverwriteStorage)
+    official_report_date = models.DateField(blank=True, null=True)
+    official_report_file = models.FileField(upload_to='files', default=timezone.now, storage=OverwriteStorage)
+    order_paper_date = models.DateField(blank=True, null=True)
+    order_paper_file = models.FileField(upload_to='files', default=timezone.now, storage=OverwriteStorage)
+
+    class Meta:
+        db_table = 'Resources'
+        verbose_name_plural = "Resources"
+
+    def save(self, *args, **kwargs):
+        self.vp_file = f'{self.vp_date}.pdf'
+        self.official_report_file = f'{self.official_report_date}.pdf'
+        self.order_paper_file = f'{self.order_paper_date}.pdf'
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.order_paper_date

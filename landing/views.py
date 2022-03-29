@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from edharulesandbiz import settings
-from landing.models import MemberInfo
+from landing.models import MemberInfo, Resume, News, MemberResume
 from laws.models import BillsAndLaws
 
 
@@ -74,9 +74,10 @@ def appstart(request):
 
 def portfolio(request, constituency):
     member = MemberInfo.objects.get(constituency=constituency)
+    resume = MemberResume.objects.get(constituency=member.constituency)
     if member.othernames is None:
         member.othernames = ''
-    return render(request, 'portfolio.html', {'member': member})
+    return render(request, 'portfolio.html', {'member': member, 'resume': resume})
 
 
 def member_area(request):
@@ -85,9 +86,10 @@ def member_area(request):
 
         if user.username.startswith('hon.'):
             member = MemberInfo.objects.get(username=user.username)
+            resume = MemberResume.objects.get(constituency=member.constituency)
             if member.othernames is None:
                 member.othernames = ''
-            return render(request, 'member_area.html', {'member': member})
+            return render(request, 'member_area.html', {'member': member, 'resume': resume})
         else:
             # messages.warning(request, "You don't have the required permissions for this page")
             return redirect('home')
@@ -118,6 +120,7 @@ def error_403(request, exception):
 
 
 def news(request):
+    news = News.objects.all()
     return render(request, 'blog.html')
 
 

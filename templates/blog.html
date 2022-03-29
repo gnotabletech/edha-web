@@ -67,21 +67,21 @@
               </div>
 
               <h2 class="entry-title">
-                <a href="{% url 'news_detail' %}">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia</a>
+                <a href="{% url 'news_detail' %}">{{ news.news_title }}</a>
               </h2>
 
               <div class="entry-meta">
                 <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{% url 'news_detail' %}">John Doe</a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{% url 'news_detail' %}"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="{% url 'news_detail' %}">12 Comments</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{% url 'news_detail' %}">{{ news.author }}</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{% url 'news_detail' %}"><time datetime="2020-01-01">
+                    {{ news.news_date }}</time></a></li>
+                  <!--li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="{% url 'news_detail' %}">12 Comments</a></li-->
                 </ul>
               </div>
 
               <div class="entry-content">
                 <p>
-                  Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
-                  Et eveniet enim. Qui velit est ea dolorem doloremque deleniti aperiam unde soluta. Est cum et quod quos aut ut et sit sunt. Voluptate porro consequatur assumenda perferendis dolore.
+                  {{ news.news_details|truncatechars:200 }}
                 </p>
                 <div class="read-more">
                   <a href="{% url 'news_detail' %}">Read More</a>
