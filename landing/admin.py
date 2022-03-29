@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from django.contrib.auth.admin import UserAdmin
 
-from landing.models import MemberInfo, StaffInfo, Resume, News, Resources
+from landing.models import MemberInfo, StaffInfo, StaffResume, News, Resources, MemberResume
 
 
 class MemberInfoAdmin(admin.ModelAdmin):
@@ -19,6 +19,15 @@ class MemberInfoAdmin(admin.ModelAdmin):
         return False
 
 
+class MemberResumeAdmin(admin.ModelAdmin):
+    search_fields = ['degree_1', 'degree_2', 'degree_3', 'constituency']
+    readonly_fields = ['constituency']
+    ordering = ['constituency']
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+
 class StaffInfoAdmin(admin.ModelAdmin):
     search_fields = ['username', 'surname', 'firstname', 'designation']
 
@@ -26,6 +35,7 @@ class StaffInfoAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(StaffInfo, StaffInfoAdmin)
 admin.site.register(MemberInfo, MemberInfoAdmin)
-admin.site.register(Resume)
+admin.site.register(StaffResume)
 admin.site.register(News)
 admin.site.register(Resources)
+admin.site.register(MemberResume, MemberResumeAdmin)

@@ -212,7 +212,7 @@ class MemberInfo(models.Model):
         return self.constituency
 
 
-class Resume(models.Model):
+class StaffResume(models.Model):
     DEGREE = (('FSLC', 'FIRST SCHOOL LEAVING CERTIFICATE'),
               ('SSCE', 'SENIOR SCHOOL CERTIFICATE'),
               ('OND', 'ORDINARY NATIONAL DIPLOMA'),
@@ -265,8 +265,8 @@ class Resume(models.Model):
     experience_2_date = models.DateField(blank=True, null=True)
 
     class Meta:
-        db_table = 'Resume'
-        verbose_name_plural = "Resumes"
+        db_table = 'StaffResume'
+        verbose_name_plural = "Staff Resumes"
 
     def save(self, *args, **kwargs):
         self.degree_1 = self.get_degree_1_display()
@@ -332,7 +332,7 @@ class MemberResume(models.Model):
 
     class Meta:
         db_table = 'MemberResume'
-        verbose_name_plural = "Members Resumes"
+        verbose_name_plural = "Member Resumes"
 
     def save(self, *args, **kwargs):
         self.degree_1 = self.get_degree_1_display()
@@ -341,7 +341,7 @@ class MemberResume(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.username
+        return str(self.constituency)
 
 
 class News(models.Model):

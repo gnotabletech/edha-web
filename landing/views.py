@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from edharulesandbiz import settings
-from landing.models import MemberInfo, Resume, News, MemberResume
+from landing.models import MemberInfo, StaffResume, News, MemberResume
 from laws.models import BillsAndLaws
 
 
