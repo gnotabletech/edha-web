@@ -370,11 +370,14 @@ class News(models.Model):
 class Resources(models.Model):
     id = models.AutoField(primary_key=True)
     vp_date = models.DateField(blank=True, null=True)
-    vp_file = models.FileField(upload_to='files', default=timezone.now, storage=OverwriteStorage)
-    official_report_date = models.DateField(blank=True, null=True)
-    official_report_file = models.FileField(upload_to='files', default=timezone.now, storage=OverwriteStorage)
+    vp_document = models.FileField(upload_to='files', default=timezone.now, storage=OverwriteStorage)
+    hansard_date = models.DateField(blank=True, null=True)
+    hansard_document = models.FileField(upload_to='files', default=timezone.now, storage=OverwriteStorage)
     order_paper_date = models.DateField(blank=True, null=True)
-    order_paper_file = models.FileField(upload_to='files', default=timezone.now, storage=OverwriteStorage)
+    order_paper_document = models.FileField(upload_to='files', default=timezone.now, storage=OverwriteStorage)
+    assembly = models.CharField(max_length=15, blank=True, null=True)
+    session = models.CharField(max_length=15, blank=True, null=True)
+    quarter = models.CharField(max_length=15, blank=True, null=True)
 
     class Meta:
         db_table = 'Resources'
