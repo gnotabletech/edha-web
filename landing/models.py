@@ -240,39 +240,12 @@ class StaffResume(models.Model):
     # lastname = models.CharField(max_length=50, blank=True, null=True)
     # othernames = models.CharField(max_length=50, blank=True, null=True)
     username = models.ForeignKey(User, on_delete=models.CASCADE)
-    degree_1 = models.CharField(max_length=50, choices=DEGREE, default='SSCE')
-    course_1 = models.CharField(max_length=50, blank=True)
-    institution_1 = models.CharField(max_length=100, blank=True)
-    degree_1_key = models.CharField(max_length=7, choices=DEGREE, default='SSCE')
-    degree_1_date = models.DateField(blank=True, null=True)
-    degree_2 = models.CharField(max_length=50, choices=DEGREE, default='SSCE')
-    course_2 = models.CharField(max_length=50, blank=True)
-    institution_2 = models.CharField(max_length=100, blank=True)
-    degree_2_key = models.CharField(max_length=7, choices=DEGREE, default='SSCE')
-    degree_2_date = models.DateField(blank=True, null=True)
-    degree_3 = models.CharField(max_length=50, choices=DEGREE, default='SSCE')
-    course_3 = models.CharField(max_length=50, blank=True)
-    institution_3 = models.CharField(max_length=100, blank=True)
-    degree_3_key = models.CharField(max_length=7, choices=DEGREE, default='SSCE')
-    degree_3_date = models.DateField(blank=True, null=True)
-    experience_1 = models.CharField(max_length=50, blank=True, null=True)
-    experience_1_office = models.CharField(max_length=50, blank=True, null=True)
-    experience_1_duty = models.TextField()
-    experience_1_date = models.DateField(blank=True, null=True)
-    experience_2 = models.CharField(max_length=50, blank=True, null=True)
-    experience_2_office = models.CharField(max_length=50, blank=True, null=True)
-    experience_2_duty = models.TextField()
-    experience_2_date = models.DateField(blank=True, null=True)
+    degree = models.JSONField(default='dict')
+    experience = models.JSONField(default='dict')
 
     class Meta:
         db_table = 'StaffResume'
         verbose_name_plural = "Staff Resumes"
-
-    def save(self, *args, **kwargs):
-        self.degree_1 = self.get_degree_1_display()
-        self.degree_2 = self.get_degree_2_display()
-        self.degree_3 = self.get_degree_3_display()
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.username
@@ -306,39 +279,12 @@ class MemberResume(models.Model):
     # lastname = models.CharField(max_length=50, blank=True, null=True)
     # othernames = models.CharField(max_length=50, blank=True, null=True)
     constituency = models.OneToOneField(MemberInfo, on_delete=models.CASCADE, unique=True, default='1')
-    degree_1 = models.CharField(max_length=50, choices=DEGREE, default='SSCE', blank=True, null=True)
-    course_1 = models.CharField(max_length=50, blank=True, null=True)
-    institution_1 = models.CharField(max_length=100, blank=True, null=True)
-    degree_1_key = models.CharField(max_length=7, choices=DEGREE, default='SSCE', blank=True, null=True)
-    degree_1_date = models.DateField(blank=True, null=True)
-    degree_2 = models.CharField(max_length=50, choices=DEGREE, default='SSCE', blank=True, null=True)
-    course_2 = models.CharField(max_length=50, blank=True, null=True)
-    institution_2 = models.CharField(max_length=100, blank=True, null=True)
-    degree_2_key = models.CharField(max_length=7, choices=DEGREE, default='SSCE', blank=True, null=True)
-    degree_2_date = models.DateField(blank=True, null=True)
-    degree_3 = models.CharField(max_length=50, choices=DEGREE, default='SSCE', blank=True, null=True)
-    course_3 = models.CharField(max_length=50, blank=True, null=True)
-    institution_3 = models.CharField(max_length=100, blank=True, null=True)
-    degree_3_key = models.CharField(max_length=7, choices=DEGREE, default='SSCE', blank=True, null=True)
-    degree_3_date = models.DateField(blank=True, null=True)
-    experience_1 = models.CharField(max_length=50, blank=True, null=True)
-    experience_1_office = models.CharField(max_length=50, blank=True, null=True)
-    experience_1_duty = models.TextField(blank=True, null=True)
-    experience_1_date = models.DateField(blank=True, null=True)
-    experience_2 = models.CharField(max_length=50, blank=True, null=True)
-    experience_2_office = models.CharField(max_length=50, blank=True, null=True)
-    experience_2_duty = models.TextField(blank=True, null=True)
-    experience_2_date = models.DateField(blank=True, null=True)
+    degree = models.JSONField(default='dict')
+    experience = models.JSONField(default='dict')
 
     class Meta:
         db_table = 'MemberResume'
         verbose_name_plural = "Member Resumes"
-
-    def save(self, *args, **kwargs):
-        self.degree_1 = self.get_degree_1_display()
-        self.degree_2 = self.get_degree_2_display()
-        self.degree_3 = self.get_degree_3_display()
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.constituency)
@@ -385,7 +331,7 @@ class Resources(models.Model):
 
     def save(self, *args, **kwargs):
         self.vp_file = f'{self.vp_date}.pdf'
-        self.official_report_file = f'{self.official_report_date}.pdf'
+        self.official_report_file = f'{self.hansard_date}.pdf'
         self.order_paper_file = f'{self.order_paper_date}.pdf'
         super().save(*args, **kwargs)
 

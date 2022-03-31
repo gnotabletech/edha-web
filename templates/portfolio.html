@@ -188,7 +188,7 @@
       </div>
     </section><!-- End Facts Section -->
 
-    <!-- ======= Skills Section ======= -->
+    <!-- ======= Skills Section =======
     <section id="skills" class="skills section-bg">
       <div class="container">
 
@@ -252,7 +252,7 @@
         </div>
 
       </div>
-    </section><!-- End Skills Section -->
+    </section> End Skills Section -->
 
     <!-- ======= Resume Section ======= -->
     <section id="resume" class="resume">
@@ -277,43 +277,34 @@
             </div>
 
             <h3 class="resume-title">Education</h3>
+
+            {% for i in degree_count %}
             <div class="resume-item">
-              <h4>Master of Fine Arts &amp; Graphic Design</h4>
-              <h5>2015 - 2016</h5>
-              <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
+              <h4>{{ resume.degree.degrees.i }}, {{ resume.degree.courses.i }}</h4>
+              <h5>{{ resume.degree.dates.i }}</h5>
+              <p><em>{{ resume.degree.institutions.i }}</em></p>
               <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend</p>
             </div>
-            <div class="resume-item">
-              <h4>{{ resume.degree_1 }}</h4>
-              <h5>{{ resume.degree_1_date }}</h5>
-              <p><em>{{ resume.degree_1_institution }}</em></p>
-              <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p>
-            </div>
+            {% endfor %}
+
           </div>
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <h3 class="resume-title">Professional Experience</h3>
+
+            {% for i in experience_count %}
             <div class="resume-item">
-              <h4>{{ resume.experience_1 }}</h4>
-              <h5>{{ resume.experience_1_date }}</h5>
-              <p><em>{{ resume.experience_1_place }}</em></p>
+              <h4>{{ resume.experience.job_title.i }}</h4>
+              <h5>{{ resume.experience.dates.i }}</h5>
+              <p><em>{{ resume.experience.organization.i }}</em></p>
               <ul>
-                <li>{{ resume.experience_1_duties }}</li>
+                <li>{{ resume.experience.duties.i }}</li>
                 <li>Delegate tasks to the 7 members of the design team and provide counsel on all aspects of the project. </li>
                 <li>Supervise the assessment of all graphic materials in order to ensure quality and accuracy of the design</li>
                 <li>Oversee the efficient use of production project budgets ranging from $2,000 - $25,000</li>
               </ul>
             </div>
-            <div class="resume-item">
-              <h4>Graphic design specialist</h4>
-              <h5>2017 - 2018</h5>
-              <p><em>Stepping Stone Advertising, New York, NY</em></p>
-              <ul>
-                <li>Developed numerous marketing programs (logos, brochures,infographics, presentations, and advertisements).</li>
-                <li>Managed up to 5 projects or tasks at a given time while under pressure</li>
-                <li>Recommended and consulted with clients on the most appropriate graphic design</li>
-                <li>Created 4+ design presentations and proposals a month for clients and account managers</li>
-              </ul>
-            </div>
+            {% endfor %}
+
           </div>
         </div>
 
@@ -325,7 +316,7 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Constituency Projects</h2>
+          <h2>Committee Work</h2>
           <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
 
@@ -333,7 +324,7 @@
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">App</li>
+              <li data-filter=".filter-app">Selection</li>
               <li data-filter=".filter-card">Card</li>
               <li data-filter=".filter-web">Web</li>
             </ul>

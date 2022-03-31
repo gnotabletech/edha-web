@@ -75,9 +75,14 @@ def appstart(request):
 def portfolio(request, constituency):
     member = MemberInfo.objects.get(constituency=constituency)
     resume = MemberResume.objects.get(constituency=member.constituency)
+    degree_count = len(resume.degree['degrees'])
+    experience_count = len(resume.experience['job_title'])
+    print(degree_count, experience_count)
+
     if member.othernames is None:
         member.othernames = ''
-    return render(request, 'portfolio.html', {'member': member, 'resume': resume})
+    return render(request, 'portfolio.html', {'member': member, 'resume': resume, 'experience_count': range(experience_count),
+                                              'degree_count': range(degree_count) })
 
 
 def member_area(request):
@@ -121,7 +126,7 @@ def error_403(request, exception):
 
 def news(request):
     news = News.objects.all()
-    return render(request, 'blog.html')
+    return render(request, 'blog.html', {'news': news})
 
 
 def news_detail(request):
