@@ -217,7 +217,7 @@ class StaffResume(models.Model):
               ('SSCE', 'SENIOR SCHOOL CERTIFICATE'),
               ('OND', 'ORDINARY NATIONAL DIPLOMA'),
               ('HND', 'HIGHER NATIONAL DIPLOMA'),
-              ('B.SC', 'BACHELOR OF SCIENCE'),
+              ('B.Sc', 'BACHELOR OF SCIENCE'),
               ('BPA', 'BACHELORS IN PUBLIC ADMINISTRATION'),
               ('BA', 'BACHELOR OF ARTS'),
               ('MBA', 'MASTER OF BUSINESS ADMINISTRATION'),
@@ -240,12 +240,37 @@ class StaffResume(models.Model):
     # lastname = models.CharField(max_length=50, blank=True, null=True)
     # othernames = models.CharField(max_length=50, blank=True, null=True)
     username = models.ForeignKey(User, on_delete=models.CASCADE)
-    degree = models.JSONField(default='dict')
-    experience = models.JSONField(default='dict')
+    degree = models.CharField(max_length=25, choices=DEGREE, default='B.Sc', blank=True, null=True)
+    institution = models.CharField(max_length=255, blank=True, null=True)
+    course = models.CharField(max_length=25, blank=True, null=True)
+    degree_date = models.DateField(default=timezone.now)
+    save_degree = models.BooleanField(default=False)
+    degrees = models.JSONField(default={"degrees": [], "institutions": [], "courses": [], "dates": []})
+    job_title = models.CharField(max_length=25, blank=True, null=True)
+    organization = models.CharField(max_length=255, blank=True, null=True)
+    duties = models.CharField(max_length=25, blank=True, null=True)
+    experience_date = models.DateField(default=timezone.now)
+    save_experience = models.BooleanField(default=False)
+    experiences = models.JSONField(default={"job_title": [], "organization": [], "dates": [], "duties": []})
 
     class Meta:
         db_table = 'StaffResume'
         verbose_name_plural = "Staff Resumes"
+
+    def save(self, *args, **kwargs):
+        if self.save_degree:
+            self.degrees['degrees'].append(self.degree)
+            self.degrees['institutions'].append(self.institution)
+            self.degrees['courses'].append(self.course)
+            self.degrees['dates'].append(self.degree_date)
+        if self.save_experience:
+            self.experiences['job_title'].append(self.job_title)
+            self.experiences['organization'].append(self.organization)
+            self.experiences['duties'].append(self.duties)
+            self.experiences['dates'].append(self.experience_date)
+        self.save_degree = False
+        self.save_experience = False
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.username
@@ -256,7 +281,7 @@ class MemberResume(models.Model):
               ('SSCE', 'SENIOR SCHOOL CERTIFICATE'),
               ('OND', 'ORDINARY NATIONAL DIPLOMA'),
               ('HND', 'HIGHER NATIONAL DIPLOMA'),
-              ('B.SC', 'BACHELOR OF SCIENCE'),
+              ('B.Sc', 'BACHELOR OF SCIENCE'),
               ('BPA', 'BACHELORS IN PUBLIC ADMINISTRATION'),
               ('BA', 'BACHELOR OF ARTS'),
               ('MBA', 'MASTER OF BUSINESS ADMINISTRATION'),
@@ -279,12 +304,37 @@ class MemberResume(models.Model):
     # lastname = models.CharField(max_length=50, blank=True, null=True)
     # othernames = models.CharField(max_length=50, blank=True, null=True)
     constituency = models.OneToOneField(MemberInfo, on_delete=models.CASCADE, unique=True, default='1')
-    degree = models.JSONField(default='dict')
-    experience = models.JSONField(default='dict')
+    degree = models.CharField(max_length=25, choices=DEGREE, default='B.Sc', blank=True, null=True)
+    institution = models.CharField(max_length=255, blank=True, null=True)
+    course = models.CharField(max_length=25, blank=True, null=True)
+    degree_date = models.DateField(default=timezone.now)
+    save_degree = models.BooleanField(default=False)
+    degrees = models.JSONField(default={"degrees": [], "institutions": [], "courses": [], "dates": []})
+    job_title = models.CharField(max_length=25, blank=True, null=True)
+    organization = models.CharField(max_length=255, blank=True, null=True)
+    duties = models.CharField(max_length=25, blank=True, null=True)
+    experience_date = models.DateField(default=timezone.now)
+    save_experience = models.BooleanField(default=False)
+    experiences = models.JSONField(default={"job_title": [], "organization": [], "dates": [], "duties": []})
 
     class Meta:
         db_table = 'MemberResume'
         verbose_name_plural = "Member Resumes"
+
+    def save(self, *args, **kwargs):
+        if self.save_degree:
+            self.degrees['degrees'].append(self.degree)
+            self.degrees['institutions'].append(self.institution)
+            self.degrees['courses'].append(self.course)
+            self.degrees['dates'].append(self.degree_date)
+        if self.save_experience:
+            self.experiences['job_title'].append(self.job_title)
+            self.experiences['organization'].append(self.organization)
+            self.experiences['duties'].append(self.duties)
+            self.experiences['dates'].append(self.experience_date)
+        self.save_degree = False
+        self.save_experience = False
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.constituency)

@@ -75,8 +75,8 @@ def appstart(request):
 def portfolio(request, constituency):
     member = MemberInfo.objects.get(constituency=constituency)
     resume = MemberResume.objects.get(constituency=member.constituency)
-    degree_count = len(resume.degree['degrees'])
-    experience_count = len(resume.experience['job_title'])
+    degree_count = len(resume.degrees['degrees'])
+    experience_count = len(resume.experiences['job_title'])
     print(degree_count, experience_count)
 
     if member.othernames is None:

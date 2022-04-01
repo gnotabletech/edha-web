@@ -20,7 +20,7 @@ class MemberInfoAdmin(admin.ModelAdmin):
 
 
 class MemberResumeAdmin(admin.ModelAdmin):
-    search_fields = ['degree_1', 'degree_2', 'degree_3', 'constituency']
+    search_fields = ['degrees', 'constituency']
     readonly_fields = ['constituency']
     ordering = ['constituency']
 
