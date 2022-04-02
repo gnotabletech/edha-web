@@ -36,7 +36,7 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, 'You have been logged in successfully')
+            # messages.success(request, 'You have been logged in successfully')
             return redirect('member_area')
         else:
             messages.warning(request, "Username or Password is incorrect !!")
@@ -81,8 +81,9 @@ def portfolio(request, constituency):
 
     if member.othernames is None:
         member.othernames = ''
-    return render(request, 'portfolio.html', {'member': member, 'resume': resume, 'experience_count': range(experience_count),
-                                              'degree_count': range(degree_count) })
+    return render(request, 'portfolio.html',
+                  {'member': member, 'resume': resume, 'experience_count': range(experience_count),
+                   'degree_count': range(degree_count)})
 
 
 def member_area(request):
@@ -96,7 +97,7 @@ def member_area(request):
                 member.othernames = ''
             return render(request, 'member_area.html', {'member': member, 'resume': resume})
         else:
-            # messages.warning(request, "You don't have the required permissions for this page")
+            messages.error(request, "You don't have the required permission to view the Members' Area.")
             return redirect('home')
 
     else:

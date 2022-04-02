@@ -24,6 +24,8 @@ psycopg = {extras = ["pool"], version = "*"}
 jmespath = "==1.0.0"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "*"}
 setuptools = "==61.0.0"
+xhtml2pdf = "*"
+weasyprint = "*"
 
 [dev-packages]
 

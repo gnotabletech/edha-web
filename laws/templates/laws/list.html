@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<title>Print Laws</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'assets/img/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/table/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/table/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/table/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/table/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/table/vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/table/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/table/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+					<div class="table">
+
+						<div class="row header">
+							<div class="cell flex">
+								S/N
+							</div>
+							<div class="cell flex">
+								TITLE
+							</div>
+							<div class="cell">
+								STAGE
+							</div>
+							<div class="cell">
+								DATE SIGNED
+							</div>
+						</div>
+
+						{% for law in laws %}
+						<div class="row">
+							<div class="cell" data-title="S/N">
+								{{ law.pk }}
+							</div>
+							<div class="cell" data-title="Title">
+								{{ law.title }}
+							</div>
+							<div class="cell" data-title="Stage">
+								{{ law.stage }}
+							</div>
+							<div class="cell" data-title="Date signed">
+								{{ law.assent_date }}
+							</div>
+						</div>
+						{% endfor %}
+
+					</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+<!--===============================================================================================-->	
+	<script src="{% static 'assets/table/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'assets/table/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'assets/table/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'assets/table/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'assets/table/js/main.js' %}"></script>
+
+</body>
+</html>
