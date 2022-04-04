@@ -1,7 +1,6 @@
 from django.db.models import F
 from django.shortcuts import render, redirect
 
-
 from .models import BillsAndLaws
 
 
@@ -54,6 +53,7 @@ def getlaw(request):
             F('assent_date').desc(nulls_last=True), F('stage_key').desc(nulls_last=True)) | BillsAndLaws.objects.filter(
             short_title__contains=request.session.get('searchstring')).order_by(F('assent_date').desc(nulls_last=True),
                                                                                 F('stage_key').desc(nulls_last=True))
+        request.session['laws'] = laws
         laws_count = BillsAndLaws.objects.all().count()
         assented_laws_count = BillsAndLaws.objects.filter(stage='ASSENTED TO').count()
         pending_laws_count = BillsAndLaws.objects.exclude(stage='ASSENTED TO').count()
@@ -70,16 +70,40 @@ def print_law(request):
         user = request.user
         laws = BillsAndLaws.objects.all().order_by(F('assent_date').desc(nulls_last=True),
                                                    F('stage_key').desc(nulls_last=True))
-        laws_count = BillsAndLaws.objects.all().count()
-        pages = BillsAndLaws.objects.all()[:laws_count:10]
-        assented_laws_count = BillsAndLaws.objects.filter(stage='ASSENTED TO').count()
-        pending_laws_count = BillsAndLaws.objects.exclude(stage='ASSENTED TO').count()
-        awaiting_assent_count = BillsAndLaws.objects.filter(stage='AWAITING ASSENT').count()
         return render(request, 'laws/list.html',
-                      {'user': user, 'laws': laws, 'laws_count': laws_count, 'assented_laws_count': assented_laws_count,
-                       'pending_laws_count': pending_laws_count, 'awaiting_assent_count': awaiting_assent_count,
-                       'pages': pages})
+                      {'user': user, 'laws': laws})
     else:
         return redirect('login')
 
 
+def print_law_report(request):
+    if request.user.is_authenticated:
+        user = request.user
+        laws = BillsAndLaws.objects.all().order_by(F('assent_date').desc(nulls_last=True),
+                                                   F('stage_key').desc(nulls_last=True))
+        return render(request, 'laws/bills_report.html',
+                      {'user': user, 'laws': laws})
+    else:
+        return redirect('login')
+
+
+def print_pending_bills(request):
+    if request.user.is_authenticated:
+        user = request.user
+        laws = BillsAndLaws.objects.exclude(stage="ASSENTED TO").order_by(F('assent_date').desc(nulls_last=True),
+                                                                          F('stage_key').desc(nulls_last=True))
+        return render(request, 'laws/bills_report.html',
+                      {'user': user, 'laws': laws})
+    else:
+        return redirect('login')
+
+
+def print_assented_laws(request):
+    if request.user.is_authenticated:
+        user = request.user
+        laws = BillsAndLaws.objects.filter(stage="ASSENTED TO").order_by(F('assent_date').desc(nulls_last=True),
+                                                                          F('stage_key').desc(nulls_last=True))
+        return render(request, 'laws/bills_report.html',
+                      {'user': user, 'laws': laws})
+    else:
+        return redirect('login')

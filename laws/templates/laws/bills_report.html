@@ -2,7 +2,7 @@
 {% load static %}
 <html lang="en">
 <head>
-	<title>Print Bills and Laws</title>
+	<title>Print Bills and Laws Report</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -37,23 +37,35 @@
 						<h5 class="text-white">EDO STATE HOUSE OF ASSEMBLY</h5>
 						<h5 class="text-white">Chief Anthony Enahoro Complex</h5>
 						<h5 class="text-white">King's Square, Benin City</h5>
-						<h3 class="text-white">LIST OF BILLS AND LAWS</h3>
+						<h3 class="text-white">DETAILED REPORT OF BILLS AND LAWS</h3>
 					</div>
 				</div>
 					<div class="table">
 						<div class="tr header">
 							<div class="cell">S/N</div>
-							<div class="cell">TITLE</div>
-							<div class="cell">STAGE</div>
-							<div class="cell">DATE SIGNED</div>
+							<div class="cell" style="width: 90px">RECEIVED</div>
+							<div class="cell" style="width: auto">TITLE</div>
+							<div class="cell" style="width: 90px">FIRST READING</div>
+							<div class="cell" style="width: 90px">SECOND READING</div>
+							<div class="cell" style="width: 90px">DATE REFERRED TO COMMITTEE</div>
+							<div class="cell" style="width: 90px">THIRD READING</div>
+							<div class="cell" style="width: 90px">DATE OF ASSENT</div>
+							<div class="cell" style="width: 100px padding-right: 5px">REMARKS</div>
+
 						</div>
 
 						{% for law in laws %}
 						<div class="tr">
 							<div class="cell" data-title="S/N">{{ forloop.counter }}.</div>
-							<div class="cell" data-title="Title">{{ law.title }}</div>
-							<div class="cell" data-title="Stage">{{ law.stage }}</div>
-							<div class="cell" data-title="Date signed">{{ law.assent_date }}</div>
+							<div class="cell" style="width: 90px" data-title="Date Received">{{ law.publication|date:"F d, Y" }}</div>
+							<div class="cell" style="width: auto" data-title="Title">{{ law.title }}</div>
+							<div class="cell" style="width: 90px" data-title="First Reading">{{ law.first_reading|date:"F d, Y" }}</div>
+							<div class="cell" style="width: 90px" data-title="Second Reading">{{ law.second_reading|date:"F d, Y" }}</div>
+							<div class="cell" style="width: 90px" data-title="Date Referred to Committee">{{ law.committee_date|date:"F d, Y" }}</div>
+							<div class="cell" style="width: 90px" data-title="Third Reading">{{ law.third_reading|date:"F d, Y" }}</div>
+							<div class="cell" style="width: 90px" data-title="Date of Assent">{{ law.assent_date|date:"F d, Y" }}</div>
+							<div class="cell" style="width: 90px" data-title="Stage">{{ law.stage }}</div>
+
 						</div>
 						{% endfor %}
 
