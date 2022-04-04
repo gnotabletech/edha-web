@@ -81,8 +81,9 @@ def print_law_report(request):
         user = request.user
         laws = BillsAndLaws.objects.all().order_by(F('assent_date').desc(nulls_last=True),
                                                    F('stage_key').desc(nulls_last=True))
+        title = "DETAILED REPORT OF BILLS AND LAWS"
         return render(request, 'laws/bills_report.html',
-                      {'user': user, 'laws': laws})
+                      {'user': user, 'laws': laws, 'title': title})
     else:
         return redirect('login')
 
@@ -92,8 +93,9 @@ def print_pending_bills(request):
         user = request.user
         laws = BillsAndLaws.objects.exclude(stage="ASSENTED TO").order_by(F('assent_date').desc(nulls_last=True),
                                                                           F('stage_key').desc(nulls_last=True))
+        title = "DETAILED REPORT OF PENDING BILLS"
         return render(request, 'laws/bills_report.html',
-                      {'user': user, 'laws': laws})
+                      {'user': user, 'laws': laws, 'title': title})
     else:
         return redirect('login')
 
@@ -103,7 +105,8 @@ def print_assented_laws(request):
         user = request.user
         laws = BillsAndLaws.objects.filter(stage="ASSENTED TO").order_by(F('assent_date').desc(nulls_last=True),
                                                                           F('stage_key').desc(nulls_last=True))
+        title = "DETAILED REPORT OF ASSENTED LAWS"
         return render(request, 'laws/bills_report.html',
-                      {'user': user, 'laws': laws})
+                      {'user': user, 'laws': laws, 'title': title})
     else:
         return redirect('login')
