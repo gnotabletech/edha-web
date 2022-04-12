@@ -15,9 +15,9 @@ class BillsAndLawsAdmin(admin.ModelAdmin):
             updated,) % updated, messages.SUCCESS)
 
     search_fields = ['title', 'short_title']
-    fields = ['title', 'short_title', 'stage_key', 'sponsor', 'first_reading', 'second_reading', 'committee_date',
+    fields = ['title', 'short_title', 'stage_key', 'sponsor', 'publication', 'first_reading', 'second_reading', 'committee_date',
               'referred_committee', 'third_reading', 'assent_date', 'document']
-    list_filter = ['stage_key', 'assent_date', ('assent_date', DateRangeFilter)]
+    list_filter = ['stage_key', 'assent_date', 'publication', 'first_reading','second_reading','third_reading','publication', ('assent_date', DateRangeFilter)]
     list_display = ['title', 'short_title', 'stage_key', 'assent_date']
     actions = [assent]
 
