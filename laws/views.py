@@ -97,7 +97,7 @@ def print_law_report(request):
 def print_pending_bills(request):
     if request.user.is_authenticated:
         user = request.user
-        laws = BillsAndLaws.objects.exclude(stage="ASSENTED TO").order_by(F('assent_date').desc(nulls_last=True),
+        laws = BillsAndLaws.objects.exclude(stage="ASSENTED TO").order_by(F('publication').desc(nulls_last=True),
                                                                           F('stage_key').desc(nulls_last=True))
         title = "DETAILED REPORT OF PENDING BILLS"
         return render(request, 'laws/bills_report.html',
