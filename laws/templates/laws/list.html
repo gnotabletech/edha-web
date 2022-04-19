@@ -41,7 +41,7 @@
 					</div>
 				</div>
 				<div><a href="{% url 'laws' %}" class="link-light">Back</a></div>
-				<div><canvas id="myChart" width="200" height="50"></canvas></div>
+				<div class="chart-container" style="position: relative; background: white;"><canvas id="myChart" class="flex"></canvas></div>
 					<div class="table">
 						<div class="tr header">
 							<div class="cell">S/N</div>
@@ -150,9 +150,7 @@ const myChart = new Chart(ctx, {
     options: {
 	plugins: {
 		legend: {
-			labels: {
-				color: "darkgray"
-			}
+			position: 'chartArea'
 		}
 	},
     responsive: true,
@@ -161,25 +159,21 @@ const myChart = new Chart(ctx, {
         scales: {
             x: {
         		stacked: true,
-        		ticks: {
-        			color: "darkgray"
-        			},
+
         		title: {
         			display: true,
         			text: "Assemblies",
-        			color: "darkgray"
+
         			}
 		  		},
 		  	y: {
 				stacked: false,
 				beginAtZero: true,
-				ticks: {
-        			color: "darkgray"
-        			},
+
         		title: {
         			display: true,
         			text: "No. of Bills/Laws",
-        			color: "darkgray"
+
         			}
 		  		}
         }
