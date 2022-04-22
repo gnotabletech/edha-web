@@ -22,9 +22,12 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'assets/table/css/main.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
 <!--===============================================================================================-->
+
+
 </head>
 <body>
-	
+
+
 	<div class="limiter bg-success">
 		<div class="container-table100">
 
@@ -39,6 +42,9 @@
 						<h5 class="text-white">King's Square, Benin City</h5>
 						<h3 class="text-white">{{ title }}</h3>
 					</div>
+					<div><a href="{% url 'laws' %}" class="link-light">Back</a></div>
+					<div class="chart-container" style="position: relative; background: white;"><canvas id="myChart" class="flex"></canvas></div>
+
 				</div>
 					<div class="table">
 						<div class="tr header">
@@ -75,9 +81,9 @@
 	</div>
 
 
-	
 
-<!--===============================================================================================-->	
+
+<!--===============================================================================================-->
 	<script src="{% static 'assets/table/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 <!--===============================================================================================-->
 	<script src="{% static 'assets/table/vendor/bootstrap/js/popper.js' %}"></script>
@@ -86,6 +92,121 @@
 	<script src="{% static 'assets/table/vendor/select2/select2.min.js' %}"></script>
 <!--===============================================================================================-->
 	<script src="{% static 'assets/table/js/main.js' %}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{ chart_label }},
+        datasets: [{
+            label: 'Bills received',
+            data: {{ law_count }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 2
+        },
+        {
+            label: 'Laws Signed',
+            data: {{ assented_laws_count }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 2
+        },
+        {
+            label: 'Bills Pending',
+            data: {{ pending_laws_count }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: {
+	plugins: {
+		legend: {
+			position: 'chartArea'
+		}
+	},
+	elements: {
+		point: {
+			radius: 5
+		}
+	},
+    responsive: true,
+     lineTension: 0.3,
+     fill: true,
+        scales: {
+            x: {
+        		stacked: true,
+
+        		title: {
+        			display: true,
+        			text: "Assemblies",
+
+        			}
+		  		},
+		  	y: {
+				stacked: false,
+				beginAtZero: true,
+
+        		title: {
+        			display: true,
+        			text: "No. of Bills/Laws",
+
+        			}
+		  		}
+        }
+    }
+});
+</script>
+<script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>
 
 </body>
 </html>

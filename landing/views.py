@@ -1,3 +1,4 @@
+import math
 import os
 
 from django.contrib import messages
@@ -5,6 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.db.models import F
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.utils import timezone
 
 from edharulesandbiz import settings
 from landing.models import MemberInfo, StaffResume, News, MemberResume
@@ -62,10 +64,31 @@ def index(request):
     signed_laws_percent = round((signed_laws / BillsAndLaws.objects.all().count()) * 100)
     passed_laws_percent = round((passed_laws / BillsAndLaws.objects.all().count()) * 100)
     print(passed_laws_percent)
+    base_year = 1995
+    assemblies = math.ceil((timezone.now().year - base_year) / 4)
+    print(assemblies)
+
+    assembly_start = base_year + (4 * (assemblies - 1))
+    assembly_end = assembly_start + 4
+    print(f'{assembly_start} to {assembly_end}')
+
+    current_assembly_law_count = BillsAndLaws.objects.filter(publication__year__gte=assembly_start,
+                                            publication__year__lte=assembly_end).count()
+    current_assembly_law_percentage = round((current_assembly_law_count / BillsAndLaws.objects.all().count()) * 100)
+    pending_laws_count = BillsAndLaws.objects.filter(publication__year__gte=assembly_start,
+                                                     publication__year__lte=assembly_end).exclude(stage='ASSENTED TO').count()
+    current_assembly_pending_percentage = round((pending_laws_count / BillsAndLaws.objects.exclude(stage='ASSENTED TO').count()) * 100)
+    assented_laws_count = BillsAndLaws.objects.filter(publication__year__gte=assembly_start,
+                                                      publication__year__lte=assembly_end).filter(stage='ASSENTED TO').count()
+    current_assembly_assented_percentage = round((assented_laws_count / signed_laws) * 100)
     return render(request, 'home.html', {'members': members, 'login_status': login_status, 'laws': laws,
                                          'passed_laws_percent': passed_laws_percent,
                                          'signed_laws_percent': signed_laws_percent, 'signed_laws': signed_laws,
-                                         'passed_laws': passed_laws, 'awaiting_assent': awaiting_assent})
+                                         'passed_laws': passed_laws, 'awaiting_assent': awaiting_assent,
+                                         'current_assembly_law_percent': current_assembly_law_percentage,
+                                         'current_assembly_assented_percent': current_assembly_assented_percentage,
+                                         'current_assembly_pending_percent': current_assembly_pending_percentage,
+                                         'assembly': assemblies})
 
 
 def appstart(request):

@@ -176,7 +176,18 @@
                             <div class="icon"><i class="bi bi-bar-chart"></i></div>
                           </div>
                           <h2 class="title"><a href="{% url 'portfolio' constituency=member.constituency %}">{{ member.position }}</a></h2>
-                          <p>
+                          <div class="member text-center">
+                            {% if member.firstname is not none %}
+                              Hon. {{ member.firstname|title }}
+                            {% endif %}
+                            {% if member.othernames is not none %}
+                              {{ member.othernames|title }}
+                            {% endif %}
+                            {% if member.lastname is not none %}
+                              {{ member.lastname|title }}
+                            {% endif %}
+                          </div>
+                          <p class="title text-center">
                             MEMBER REPRESENTING {{ member.constituency }}
                           </p>
                         </div>
@@ -240,19 +251,41 @@
 
           <div class="progress">
             <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{ passed_laws_percent }}" aria-valuemin="0" aria-valuemax="100">
-              <span class="skill">Bills Passed<i class="val">{{ passed_laws_percent }}%</i></span>
+              <span class="skill">Total Bills Passed<i class="val">{{ passed_laws_percent }}%</i></span>
             </div>
           </div>
 
           <div class="progress">
             <div class="progress-bar bg-info" role="progressbar" aria-valuenow="{{ signed_laws_percent }}" aria-valuemin="0" aria-valuemax="100">
-              <span class="skill">Laws Signed<i class="val">{{ signed_laws_percent }}%</i></span>
+              <span class="skill">Total Laws Signed<i class="val">{{ signed_laws_percent }}%</i></span>
             </div>
           </div>
 
           <div class="progress">
-            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-              <span class="skill">Petitions Resolved<i class="val">75%</i></span>
+            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="{{ current_assembly_law_percent }}" aria-valuemin="0" aria-valuemax="100">
+              {% if assembly|slice:"-1:" == "1" %}
+                <span class="skill">Bills in {{ assembly }}st Assembly<i class="val">{{ current_assembly_law_percent }}%</i></span>
+              {% elif assembly|slice:"-1:" == "2" %}
+                <span class="skill">Bills in {{ assembly }}nd Assembly<i class="val">{{ current_assembly_law_percent }}%</i></span>
+              {% elif assembly|slice:"-1:" == "3" %}
+                <span class="skill">Bills in {{ assembly }}rd Assembly<i class="val">{{ current_assembly_law_percent }}%</i></span>
+              {% else %}
+                <span class="skill">Bills in {{ assembly }}th Assembly<i class="val">{{ current_assembly_law_percent }}%</i></span>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="progress">
+            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{ current_assembly_assented_percent }}" aria-valuemin="0" aria-valuemax="100">
+              {% if assembly|slice:"-1:" == "1" %}
+                <span class="skill">Laws in {{ assembly }}st Assembly<i class="val">{{ current_assembly_assented_percent }}%</i></span>
+              {% elif assembly|slice:"-1:" == "2" %}
+                <span class="skill">Laws in {{ assembly }}nd Assembly<i class="val">{{ current_assembly_assented_percent }}%</i></span>
+              {% elif assembly|slice:"-1:" == "3" %}
+                <span class="skill">Laws in {{ assembly }}rd Assembly<i class="val">{{ current_assembly_assented_percent }}%</i></span>
+              {% else %}
+                <span class="skill">Laws in {{ assembly }}th Assembly<i class="val">{{ current_assembly_assented_percent }}%</i></span>
+              {% endif %}
             </div>
           </div>
 
