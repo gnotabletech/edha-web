@@ -31,27 +31,27 @@ class BillsAndLaws(models.Model):
               ('STAGE6', 'AWAITING ASSENT'),
               ('STAGE7', 'ASSENTED TO'),
               ('STAGE8', 'ASSENT DENIED'))
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    title = models.TextField(db_column='TITLE', unique=True, max_length=500)  # Field name made lowercase.
-    assent_date = models.DateField(db_column='ASSENT_DATE', blank=True, null=True)  # Field name made lowercase.
-    stage = models.CharField(db_column='STAGE', max_length=20, choices=STAGES,
+    id = models.AutoField(db_column='id', primary_key=True)  # Field name made lowercase.
+    title = models.TextField(db_column='title', unique=True, max_length=500)  # Field name made lowercase.
+    assent_date = models.DateField(db_column='assent_date', blank=True, null=True)  # Field name made lowercase.
+    stage = models.CharField(db_column='stage', max_length=20, choices=STAGES,
                              default='STAGE1')  # Field name made lowercase.
     stage_key = models.CharField(max_length=6, choices=STAGES, default='STAGE1')  # Field name made lowercase.
-    sponsor = models.CharField(db_column='SPONSOR', max_length=50, blank=True, null=True)  # Field name made lowercase.
-    first_reading = models.DateField(db_column='FIRST_READING', blank=True, null=True)  # Field name made lowercase.
-    second_reading = models.DateField(db_column='SECOND_READING', blank=True, null=True)  # Field name made lowercase.
-    committee_date = models.DateField(db_column='COMMITTEE_DATE', blank=True, null=True)  # Field name made lowercase.
-    referred_committee = models.CharField(db_column='REFERRED_COMMITTEE', max_length=100, blank=True,
+    sponsor = models.CharField(db_column='sponsor', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    first_reading = models.DateField(db_column='first_reading', blank=True, null=True)  # Field name made lowercase.
+    second_reading = models.DateField(db_column='second_reading', blank=True, null=True)  # Field name made lowercase.
+    committee_date = models.DateField(db_column='committee_date', blank=True, null=True)  # Field name made lowercase.
+    referred_committee = models.CharField(db_column='referred_committee', max_length=100, blank=True,
                                           null=True)  # Field name made lowercase.
-    third_reading = models.DateField(db_column='THIRD_READING', blank=True, null=True)  # Field name made lowercase.
-    publication = models.DateField(db_column='PUBLICATION', blank=True, null=True)  # Field name made lowercase.
-    short_title = models.TextField(db_column='SHORT_TITLE', blank=True,
+    third_reading = models.DateField(db_column='third_reading', blank=True, null=True)  # Field name made lowercase.
+    publication = models.DateField(db_column='publication', blank=True, null=True)  # Field name made lowercase.
+    short_title = models.TextField(db_column='short_title', blank=True,
                                    null=True)  # Field name made lowercase.
     document = models.FileField(upload_to='files', default=timezone.now, storage=OverwriteStorage)
 
     class Meta:
         # managed = False
-        db_table = 'Bills_and_Laws'
+        db_table = 'bills_and_laws'
         verbose_name_plural = "Bills and Laws"
 
     def save(self, *args, **kwargs):

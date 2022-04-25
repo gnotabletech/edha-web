@@ -24,8 +24,8 @@
     <form id="loginform" action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         <div class="form-signin">
-            <input type="text" name="username" id="username" placeholder="Enter Username">
-            <input type="password" class="form-control mb-3" name="password" id="password" placeholder="Enter Password">
+            <input type="text" name="username" id="username" placeholder="Username">
+            <input type="password" class="form-control mb-3" name="password" id="password" placeholder="Password">
             <button id="loginbutton" type="submit" class="btn w-100 btn-success text-center">Login</button>
         </div>
         <h6 class="text-center">Forgot password? <a href="{% url 'password_reset' %}">Click Here</a> to reset</h6>
