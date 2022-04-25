@@ -20,10 +20,10 @@
     {% endif %}
     <form id="loginform" action="{% url 'login_user_quicksearch' %}" method="POST">
         {% csrf_token %}
-        <div class="form-signin">
-            <input type="text" name="username" id="username" placeholder="Enter Username">
-            <input type="password" class="form-control mb-3" name="password" id="password" placeholder="Enter Password">
-            <div><button id="loginbutton" type="submit" class="btn w-100 btn-success">Login</button></div>
+        <div class="form-signin ms-5 me-5">
+            <input type="text" name="username" id="username" placeholder="Username">
+            <input type="password" class="form-control mb-3" name="password" id="password" placeholder="Password">
+            <button id="loginbutton" type="submit" class="btn w-100 btn-success text-center mb-3 ms-1">Login</button>
         </div>
         <h6 class="text-center">Forgot password? <a href="{% url 'password_reset' %}">Click Here</a> to reset</h6>
     </form>
