@@ -40,7 +40,7 @@
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home' %}">Start</a>
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'index' %}">Rules</a>
@@ -53,8 +53,11 @@
                     <a class="nav-link" href="{% url 'home' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    <a class="nav-link" href="{% url 'index' %}">Rules</a>
                 </li>
+                <!--<li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>-->
                 {% endif %}
             </ul>
         </div>
