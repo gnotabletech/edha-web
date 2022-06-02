@@ -46,7 +46,7 @@
 					<div class="chart-container" style="position: relative; background: white;"><canvas id="myChart" class="flex"></canvas></div>
 
 				</div>
-					<div class="table">
+					<div class="table" id="tablelist">
 						<div class="tr header">
 							<div class="cell">S/N</div>
 							<div class="cell" style="width: 90px">RECEIVED</div>
@@ -76,6 +76,7 @@
 						{% endfor %}
 
 					</div>
+				<button onclick="exportData()"><span class="glyphicon glyphicon-download">Export Report</span></button>
 			</div>
 		</div>
 	</div>
@@ -92,6 +93,7 @@
 	<script src="{% static 'assets/table/vendor/select2/select2.min.js' %}"></script>
 <!--===============================================================================================-->
 	<script src="{% static 'assets/table/js/main.js' %}"></script>
+	<script src="{% static 'assets/table/js/exportcsv.js' %}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 const ctx = document.getElementById('myChart').getContext('2d');
