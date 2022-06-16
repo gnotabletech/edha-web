@@ -91,20 +91,25 @@ def print_law(request):
             assembly_end = assembly_start + 4
             print(f'{assembly_start} to {assembly_end}')
 
-            law_count.append(BillsAndLaws.objects.filter(Q(assent_date__year__gte=assembly_start,
-                                                                     assent_date__year__lte=assembly_end) | Q(
-                                                                        publication__year__gte=assembly_start,
-                                                                        publication__year__lte=assembly_end)).count())
-            pending_laws_count.append(BillsAndLaws.objects.filter(Q(assent_date__year__gte=assembly_start,
-                                                                     assent_date__year__lte=assembly_end) | Q(
-                                                                        publication__year__gte=assembly_start,
-                                                                        publication__year__lte=assembly_end)).exclude(
+            law_count.append(BillsAndLaws.objects.filter(Q(
+                publication__year__gte=assembly_start,
+                publication__year__lte=assembly_end) | Q(
+                third_reading__year__gte=assembly_start,
+                third_reading__year__lte=assembly_end) | Q(assent_date__year__gte=assembly_start,
+                                                           assent_date__year__lte=assembly_end)).count())
+            pending_laws_count.append(BillsAndLaws.objects.filter(Q(publication__year__gte=assembly_start,
+                                                                    publication__year__lte=assembly_end) | Q(
+                third_reading__year__gte=assembly_start,
+                third_reading__year__lte=assembly_end) | Q(assent_date__year__gte=assembly_start,
+                                                           assent_date__year__lte=assembly_end)).exclude(
                 stage='ASSENTED TO').count())
             assented_laws_count.append(BillsAndLaws.objects.filter(Q(assent_date__year__gte=assembly_start,
                                                                      assent_date__year__lte=assembly_end) | Q(
-                                                                        publication__year__gte=assembly_start,
-                                                                        publication__year__lte=assembly_end)).filter(
-                                                                        stage='ASSENTED TO').count())
+                publication__year__gte=assembly_start,
+                publication__year__lte=assembly_end) | Q(
+                third_reading__year__gte=assembly_start,
+                third_reading__year__lte=assembly_end)).filter(
+                stage='ASSENTED TO').count())
             chart_label.append(assembly + 1)
             print(assented_laws_count)
         print(chart_label)
@@ -124,7 +129,7 @@ def print_law_report(request):
         assented_laws_count = []
         pending_laws_count = []
         chart_label = []
-        base_year = 1995
+        base_year = 1991
         assemblies = math.ceil((timezone.now().year - base_year) / 4)
         print(assemblies)
         for assembly in range(assemblies):
@@ -132,13 +137,24 @@ def print_law_report(request):
             assembly_end = assembly_start + 4
             print(f'{assembly_start} to {assembly_end}')
 
-            law_count.append(BillsAndLaws.objects.filter(publication__year__gte=assembly_start,
-                                                         publication__year__lte=assembly_end).count())
-            pending_laws_count.append(BillsAndLaws.objects.filter(publication__year__gte=assembly_start,
-                                                                  publication__year__lte=assembly_end).exclude(
+            law_count.append(BillsAndLaws.objects.filter(Q(
+                publication__year__gte=assembly_start,
+                publication__year__lte=assembly_end) | Q(
+                third_reading__year__gte=assembly_start,
+                third_reading__year__lte=assembly_end) | Q(assent_date__year__gte=assembly_start,
+                                                           assent_date__year__lte=assembly_end)).count())
+            pending_laws_count.append(BillsAndLaws.objects.filter(Q(publication__year__gte=assembly_start,
+                                                                    publication__year__lte=assembly_end) | Q(
+                third_reading__year__gte=assembly_start,
+                third_reading__year__lte=assembly_end) | Q(assent_date__year__gte=assembly_start,
+                                                           assent_date__year__lte=assembly_end)).exclude(
                 stage='ASSENTED TO').count())
-            assented_laws_count.append(BillsAndLaws.objects.filter(publication__year__gte=assembly_start,
-                                                                   publication__year__lte=assembly_end).filter(
+            assented_laws_count.append(BillsAndLaws.objects.filter(Q(assent_date__year__gte=assembly_start,
+                                                                     assent_date__year__lte=assembly_end) | Q(
+                publication__year__gte=assembly_start,
+                publication__year__lte=assembly_end) | Q(
+                third_reading__year__gte=assembly_start,
+                third_reading__year__lte=assembly_end)).filter(
                 stage='ASSENTED TO').count())
             chart_label.append(assembly + 1)
         title = "DETAILED REPORT OF BILLS AND LAWS"
@@ -158,7 +174,7 @@ def print_pending_bills(request):
         assented_laws_count = []
         pending_laws_count = []
         chart_label = []
-        base_year = 1995
+        base_year = 1991
         assemblies = math.ceil((timezone.now().year - base_year) / 4)
         print(assemblies)
         for assembly in range(assemblies):
@@ -166,13 +182,24 @@ def print_pending_bills(request):
             assembly_end = assembly_start + 4
             print(f'{assembly_start} to {assembly_end}')
 
-            law_count.append(BillsAndLaws.objects.filter(publication__year__gte=assembly_start,
-                                                         publication__year__lte=assembly_end).count())
-            pending_laws_count.append(BillsAndLaws.objects.filter(publication__year__gte=assembly_start,
-                                                                  publication__year__lte=assembly_end).exclude(
+            law_count.append(BillsAndLaws.objects.filter(Q(
+                publication__year__gte=assembly_start,
+                publication__year__lte=assembly_end) | Q(
+                third_reading__year__gte=assembly_start,
+                third_reading__year__lte=assembly_end) | Q(assent_date__year__gte=assembly_start,
+                                                           assent_date__year__lte=assembly_end)).count())
+            pending_laws_count.append(BillsAndLaws.objects.filter(Q(publication__year__gte=assembly_start,
+                                                                    publication__year__lte=assembly_end) | Q(
+                third_reading__year__gte=assembly_start,
+                third_reading__year__lte=assembly_end) | Q(assent_date__year__gte=assembly_start,
+                                                           assent_date__year__lte=assembly_end)).exclude(
                 stage='ASSENTED TO').count())
-            assented_laws_count.append(BillsAndLaws.objects.filter(publication__year__gte=assembly_start,
-                                                                   publication__year__lte=assembly_end).filter(
+            assented_laws_count.append(BillsAndLaws.objects.filter(Q(assent_date__year__gte=assembly_start,
+                                                                     assent_date__year__lte=assembly_end) | Q(
+                publication__year__gte=assembly_start,
+                publication__year__lte=assembly_end) | Q(
+                third_reading__year__gte=assembly_start,
+                third_reading__year__lte=assembly_end)).filter(
                 stage='ASSENTED TO').count())
             chart_label.append(assembly + 1)
 
@@ -193,7 +220,7 @@ def print_assented_laws(request):
         assented_laws_count = []
         pending_laws_count = []
         chart_label = []
-        base_year = 1995
+        base_year = 1991
         assemblies = math.ceil((timezone.now().year - base_year) / 4)
         print(assemblies)
         for assembly in range(assemblies):
@@ -201,13 +228,24 @@ def print_assented_laws(request):
             assembly_end = assembly_start + 4
             print(f'{assembly_start} to {assembly_end}')
 
-            law_count.append(BillsAndLaws.objects.filter(publication__year__gte=assembly_start,
-                                                         publication__year__lte=assembly_end).count())
-            pending_laws_count.append(BillsAndLaws.objects.filter(publication__year__gte=assembly_start,
-                                                                  publication__year__lte=assembly_end).exclude(
+            law_count.append(BillsAndLaws.objects.filter(Q(
+                publication__year__gte=assembly_start,
+                publication__year__lte=assembly_end) | Q(
+                third_reading__year__gte=assembly_start,
+                third_reading__year__lte=assembly_end) | Q(assent_date__year__gte=assembly_start,
+                                                           assent_date__year__lte=assembly_end)).count())
+            pending_laws_count.append(BillsAndLaws.objects.filter(Q(publication__year__gte=assembly_start,
+                                                                    publication__year__lte=assembly_end) | Q(
+                third_reading__year__gte=assembly_start,
+                third_reading__year__lte=assembly_end) | Q(assent_date__year__gte=assembly_start,
+                                                           assent_date__year__lte=assembly_end)).exclude(
                 stage='ASSENTED TO').count())
-            assented_laws_count.append(BillsAndLaws.objects.filter(publication__year__gte=assembly_start,
-                                                                   publication__year__lte=assembly_end).filter(
+            assented_laws_count.append(BillsAndLaws.objects.filter(Q(assent_date__year__gte=assembly_start,
+                                                                     assent_date__year__lte=assembly_end) | Q(
+                publication__year__gte=assembly_start,
+                publication__year__lte=assembly_end) | Q(
+                third_reading__year__gte=assembly_start,
+                third_reading__year__lte=assembly_end)).filter(
                 stage='ASSENTED TO').count())
             chart_label.append(assembly + 1)
         print(chart_label)
@@ -227,7 +265,7 @@ def get_law_by_assembly(request):
         assented_laws_count = []
         pending_laws_count = []
         chart_label = []
-        base_year = 1995
+        base_year = 1991
         assemblies = math.ceil((timezone.now().year - base_year) / 4)
         print(assemblies)
         for assembly in range(assemblies):
