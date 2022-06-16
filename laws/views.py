@@ -4,7 +4,7 @@ import os
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.db.models import F
+from django.db.models import F, Q
 from django.http import FileResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
@@ -83,7 +83,7 @@ def print_law(request):
         assented_laws_count = []
         pending_laws_count = []
         chart_label = []
-        base_year = 1995
+        base_year = 1991
         assemblies = math.ceil((timezone.now().year - base_year) / 4)
         print(assemblies)
         for assembly in range(assemblies):
@@ -91,15 +91,22 @@ def print_law(request):
             assembly_end = assembly_start + 4
             print(f'{assembly_start} to {assembly_end}')
 
-            law_count.append(BillsAndLaws.objects.filter(publication__year__gte=assembly_start,
-                                                         publication__year__lte=assembly_end).count())
-            pending_laws_count.append(BillsAndLaws.objects.filter(publication__year__gte=assembly_start,
-                                                                  publication__year__lte=assembly_end).exclude(
+            law_count.append(BillsAndLaws.objects.filter(Q(assent_date__year__gte=assembly_start,
+                                                                     assent_date__year__lte=assembly_end) | Q(
+                                                                        publication__year__gte=assembly_start,
+                                                                        publication__year__lte=assembly_end)).count())
+            pending_laws_count.append(BillsAndLaws.objects.filter(Q(assent_date__year__gte=assembly_start,
+                                                                     assent_date__year__lte=assembly_end) | Q(
+                                                                        publication__year__gte=assembly_start,
+                                                                        publication__year__lte=assembly_end)).exclude(
                 stage='ASSENTED TO').count())
-            assented_laws_count.append(BillsAndLaws.objects.filter(publication__year__gte=assembly_start,
-                                                                   publication__year__lte=assembly_end).filter(
-                stage='ASSENTED TO').count())
+            assented_laws_count.append(BillsAndLaws.objects.filter(Q(assent_date__year__gte=assembly_start,
+                                                                     assent_date__year__lte=assembly_end) | Q(
+                                                                        publication__year__gte=assembly_start,
+                                                                        publication__year__lte=assembly_end)).filter(
+                                                                        stage='ASSENTED TO').count())
             chart_label.append(assembly + 1)
+            print(assented_laws_count)
         print(chart_label)
         return render(request, 'laws/list.html',
                       {'user': user, 'laws': laws, 'law_count': law_count, 'assented_laws_count': assented_laws_count,
@@ -137,7 +144,7 @@ def print_law_report(request):
         title = "DETAILED REPORT OF BILLS AND LAWS"
         return render(request, 'laws/bills_report.html',
                       {'user': user, 'laws': laws, 'law_count': law_count, 'assented_laws_count': assented_laws_count,
-                       'pending_laws_count': pending_laws_count, 'title': title, 'chart_label':chart_label})
+                       'pending_laws_count': pending_laws_count, 'title': title, 'chart_label': chart_label})
     else:
         return redirect('login')
 
@@ -172,7 +179,7 @@ def print_pending_bills(request):
         title = "DETAILED REPORT OF PENDING BILLS"
         return render(request, 'laws/bills_report.html',
                       {'user': user, 'laws': laws, 'law_count': law_count, 'assented_laws_count': assented_laws_count,
-                       'pending_laws_count': pending_laws_count, 'title': title, 'chart_label':chart_label})
+                       'pending_laws_count': pending_laws_count, 'title': title, 'chart_label': chart_label})
     else:
         return redirect('login')
 
@@ -229,20 +236,21 @@ def get_law_by_assembly(request):
             print(f'{assembly_start} to {assembly_end}')
             laws = BillsAndLaws.objects.filter(assent_date__year__gte=assembly_start,
                                                assent_date__year__lte=assembly_end).order_by(
-                                                F('assent_date').desc(nulls_last=True),
-                                                F('stage_key').desc(nulls_last=True))
+                F('assent_date').desc(nulls_last=True),
+                F('stage_key').desc(nulls_last=True))
 
             law_count.append(BillsAndLaws.objects.filter(assent_date__year__gte=assembly_start,
                                                          assent_date__year__lte=assembly_end).count())
             pending_laws_count.append(BillsAndLaws.objects.filter(assent_date__year__gte=assembly_start,
                                                                   assent_date__year__lte=assembly_end).exclude(
-                                                                    stage='ASSENTED TO').count())
+                stage='ASSENTED TO').count())
             assented_laws_count.append(BillsAndLaws.objects.filter(assent_date__year__gte=assembly_start,
                                                                    assent_date__year__lte=assembly_end).filter(
-                                                                    stage='ASSENTED TO').count())
+                stage='ASSENTED TO').count())
             chart_label.append(assembly + 1)
         return render(request, 'laws/list.html',
                       {'user': user, 'assented_laws': laws, 'law_count': law_count,
-                       'pending_laws_count': pending_laws_count, 'assented_laws_count': assented_laws_count, 'chart_label': chart_label})
+                       'pending_laws_count': pending_laws_count, 'assented_laws_count': assented_laws_count,
+                       'chart_label': chart_label})
     else:
         return redirect('login')

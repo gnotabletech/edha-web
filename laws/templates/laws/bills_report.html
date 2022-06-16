@@ -22,12 +22,10 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'assets/table/css/main.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
 <!--===============================================================================================-->
-    <script type="text/javascript">
-      window.onload = function() { window.print(); }
-    </script>
+
 
 </head>
-<body>
+<body onload=window.print()>
 
 
 	<div class="limiter bg-success">
@@ -78,7 +76,7 @@
 						{% endfor %}
 
 					</div>
-				<button onclick="exportData()"><span class="glyphicon glyphicon-download">Export Report</span></button>
+				<!--<button onclick="exportData()"><span class="glyphicon glyphicon-download">Export Report</span></button>-->
 			</div>
 		</div>
 	</div>

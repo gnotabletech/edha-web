@@ -55,9 +55,9 @@ class BillsAndLaws(models.Model):
         verbose_name_plural = "Bills and Laws"
 
     def save(self, *args, **kwargs):
-        self.document = f'{self.short_title}.pdf'.replace('/', '_').replace(') (', '_').replace(') ', '_').replace(' (',
-                                                                                                                   '_').replace(
-            ', ', '_').replace(' ', '_').replace(')', '_').replace('(', '_')
+        # self.document = f'{self.short_title}.pdf'.replace('/', '_').replace(') (', '_').replace(') ', '_').replace(' (',
+        #                                                                                                           '_').replace(
+        #    ', ', '_').replace(' ', '_').replace(')', '_').replace('(', '_')
         self.stage = self.get_stage_key_display()
         super().save(*args, **kwargs)
 
