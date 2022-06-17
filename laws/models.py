@@ -47,7 +47,7 @@ class BillsAndLaws(models.Model):
     publication = models.DateField(db_column='publication', blank=True, null=True)  # Field name made lowercase.
     short_title = models.TextField(db_column='short_title', blank=True,
                                    null=True)  # Field name made lowercase.
-    document = models.FileField(upload_to='files', default=timezone.now, storage=OverwriteStorage)
+    document = models.FileField(upload_to='files', storage=OverwriteStorage, null=True, blank=True)
 
     class Meta:
         # managed = False
