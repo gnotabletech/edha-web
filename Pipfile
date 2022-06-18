@@ -25,6 +25,8 @@ jmespath = "==1.0.0"
 setuptools = "==62.0.0"
 psycopg-binary = "==3.0.12"
 tqdm = "==4.64.0"
+django-jet-reboot = "*"
+google-api-python-client = "==1.4.1"
 
 [dev-packages]
 
