@@ -34,8 +34,8 @@ ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost', 'edha-gov.herokuapp.com', 
 # Application definition
 
 INSTALLED_APPS = [
-    'jet.dashboard',
-    'jet',
+    # 'jet.dashboard',
+    # 'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,7 +78,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.media'
             ],
         },
     },
