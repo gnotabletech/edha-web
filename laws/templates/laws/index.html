@@ -12,6 +12,7 @@
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" media="screen,projection"/>-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!--<link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">-->
     <link href="{% static 'assets/home/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
@@ -30,7 +31,18 @@
 </head>
 
 <body onload=todayDate()>
+
         <div class="floating-container">
+            <!--<div class="fixed-action-btn">
+            <a class="btn-floating btn-large red">
+                <i class="large material-icons">menu</i>
+            </a>
+            <ul>
+                <li><a class="btn-floating red"><i class="material-icons">logout</i></a> </li>
+                <li><a class="btn-floating yellow darken"><i class="material-icons">home</i></a> </li>
+                <li><a class="btn-floating green"><i class="material-icons">refresh</i></a> </li>
+            </ul>
+        </div>-->
             <div class="floating-button shadow"><i class="material-icons">menu</i></div>
           <div class="element-container">
                 <span class="float-element tooltip-left shadow">
@@ -241,6 +253,12 @@
 <script>
    AOS.init();
 </script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    $(document).ready(function){
+    $('.fixed-action-btn').floatingActionButton();
+    });
+</script>-->
 </body>
  
 </html>
