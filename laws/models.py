@@ -6,11 +6,15 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 import os
+import subprocess
 
 from django.core.files.storage import FileSystemStorage
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.http import request
 from django.utils import timezone
-
+from wand.image import Image
 from edharulesandbiz import settings
 
 
@@ -48,6 +52,8 @@ class BillsAndLaws(models.Model):
     short_title = models.TextField(db_column='short_title', blank=True,
                                    null=True)  # Field name made lowercase.
     document = models.FileField(upload_to='media', default='unavailable.pdf')
+    document_thumbnail = models.ImageField(upload_to='media/thumbnails', blank=True,
+                                           null=True, default='unavailable.jpg')
 
     class Meta:
         # managed = False
@@ -58,11 +64,33 @@ class BillsAndLaws(models.Model):
         # self.document = f'{self.short_title}.pdf'.replace('/', '_').replace(') (', '_').replace(') ', '_').replace(' (',
         #                                                                                                           '_').replace(
         #    ', ', '_').replace(' ', '_').replace(')', '_').replace('(', '_')
+        #thumbnail = Image(filename=request.FILES)
+        #document_thumbnail_converted = thumbnail.convert('jpg')
+        #self.document_thumbnail.save(f'media/thumbnail/{str(request.FILES)}'.replace('.pdf','.jpg'), document_thumbnail_converted[0])
         self.stage = self.get_stage_key_display()
         super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
+
+
+@receiver(post_save, sender=BillsAndLaws)
+def update_thumbnail(sender, instance, **kwargs):
+#    """This post save function creates a thumbnail for the commentary PDF"""
+    temp = BillsAndLaws.objects.get(pk=instance.pk)
+    thumbnail = Image(temp.document)
+    thumbnail_converted = thumbnail.convert('jpg')
+    print(thumbnail_converted)
+    print(thumbnail_converted[0])
+    print(thumbnail_converted.sequence[0])
+    #temp.update(document_thumbnail= thumbnail[0])
+#    pdf = request.FILES
+#    document_thumbnail = Image(filename=request.FILES)
+#    document_thumbnail_converted = document_thumbnail.convert('jpg')
+    # document_thumbnail_converted[0].save(filename=f'{instance.document}'.replace('.pdf', '.jpg').replace('media/','media/thumbnails'))
+    # for img in document_thumbnail_converted.sequence:
+    #    page = document_thumbnail(image=img)
+#    instance.thumbnail=f'media/thumbnail{document_thumbnail_converted[0]}'
 
 
 class AdminInfo(models.Model):

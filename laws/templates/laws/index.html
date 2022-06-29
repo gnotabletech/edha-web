@@ -153,11 +153,14 @@
             <div class="container rounded">
                 <!--<h1 class="flex-sm-fill text-sm-center">Welcome to the EDHA Laws Repository {{username}}!</h1>-->
                     {% for law in laws %}
+                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal{{ law.pk }}">
+                                            <em>open</em>
+                                        </button>
                     <div class="container rounded bg-success bg-gradient" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                         <div class="card-body bg-white mb-3 fadeIn col-sm">
                             <div class="row g-4">
                                 <div class="col-sm-1 fadeIn rounded">
-                                    <embed src="{{ law.document.url }}" type="application/pdf" height="100%" width="150px" style="overflow:hidden">
+                                    <embed src="{{ law.document.url }}" type="application/pdf" height="100%" width="150px" style="overflow:hidden" view="FitH">
                                 </div>
                                 <div class="col-sm shadow-sm rounded bg-white">
                                     <a href="{{ law.document.url }}" class="underlineHover list-group-item list-group-item-success bg-white row">
@@ -188,7 +191,25 @@
                     </div>
             </div>
         </section><!--  -->
-
+<!-- Modal-->
+            {% for law in laws %}
+              <div class="modal fade" id="exampleModal{{ law.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ law.pk }}" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header bg-success bg-gradient text-white">
+                      <h5 class="modal-title" id="exampleModalLabel{{ law.pk }}">Document Preview</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <embed src="{{ law.document.url }}" type="application/pdf" height="600px" width="100%" view="FitH" zoom="FitH">
+                    </div>
+                    <div class="modal-footer bg-light shadow">
+                      <em>Laws of the Edo State House of Assembly</em>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
         <section class="align-items-center">
             <!-- ======= Footer ======= -->
   <footer id="footer">
@@ -249,8 +270,39 @@
 <script src="{% static 'assets/vendor/purecounter/purecounter.js' %}"></script>
 <script src="{% static 'assets/js/jquery-3.2.1.js' %}"></script>
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.14.305/build/pdf.min.js"></script>
 <script>
    AOS.init();
+</script>
+<script>
+var loadingTask = pdfjsLib.getDocument({{ law.document.url }});
+loadingTask.promise.then(function(pdf) {
+  // you can now use *pdf* here
+
+var scale = 1.5;
+var viewport = page.getViewport({ scale: scale, });
+// Support HiDPI-screens.
+var outputScale = window.devicePixelRatio || 1;
+
+var canvas = document.getElementById('the-canvas');
+var context = canvas.getContext('2d');
+
+canvas.width = Math.floor(viewport.width * outputScale);
+canvas.height = Math.floor(viewport.height * outputScale);
+canvas.style.width = Math.floor(viewport.width) + "px";
+canvas.style.height =  Math.floor(viewport.height) + "px";
+
+var transform = outputScale !== 1
+  ? [outputScale, 0, 0, outputScale, 0, 0]
+  : null;
+
+var renderContext = {
+  canvasContext: context,
+  transform: transform,
+  viewport: viewport
+};
+page.render(renderContext);
+});
 </script>
 </body>
  
