@@ -24,7 +24,7 @@ PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'serviceworker.js')
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3mb!8zstg0vma!p+kb#2o@!1%n406!yrec_xg8kgow3wc7e8ej'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'edharulesandbiz.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES['default'] = dj_database_url.config(
-    default='postgres://kijntandnqzktn:aacab98effc63794b62d8559b8dc3d168436758e2f0345f92a7d3c7ee3fcf695@ec2-52-31-221-164.eu-west-1.compute.amazonaws.com:5432/dbj1toannelt42')
+    default=os.environ.get('DATABASE_URL'))
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -122,9 +122,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-AWS_ACCESS_KEY_ID = 'AKIAVNDQRA66VD6ZXO5D'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'elasticbeanstalk-us-east-2-371750668221'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.us-east-2.amazonaws.com'
 AWS_DEFAULT_ACL = 'public-read'
 AWS_S3_OBJECT_PARAMETERS = {
