@@ -153,14 +153,12 @@
             <div class="container rounded">
                 <!--<h1 class="flex-sm-fill text-sm-center">Welcome to the EDHA Laws Repository {{username}}!</h1>-->
                     {% for law in laws %}
-                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal{{ law.pk }}">
-                                            <em>open</em>
-                                        </button>
+
                     <div class="container rounded bg-success bg-gradient" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                         <div class="card-body bg-white mb-3 fadeIn col-sm">
                             <div class="row g-4">
-                                <div class="col-sm-1 fadeIn rounded">
-                                    <img src="{{ law.document_thumbnail.url }}" height="auto" width="100%">
+                                <div class="col-sm-1 fadeIn rounded" >
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ law.pk }}"><img src="{{ law.document_thumbnail.url }}" height="auto" width="100%"></a>
                                 </div>
                                 <div class="col-sm shadow-sm rounded bg-white">
                                     <a href="{{ law.document.url }}" class="underlineHover list-group-item list-group-item-success bg-white row">
@@ -201,7 +199,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <embed src="{{ law.document.url }}" type="application/pdf" height="600px" width="100%" view="FitH" zoom="FitH">
+                      <img src="{{ law.document_thumbnail.url }}" height="auto" width="100%">
                     </div>
                     <div class="modal-footer bg-light shadow">
                       <em>Laws of the Edo State House of Assembly</em>
