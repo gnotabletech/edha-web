@@ -28,6 +28,7 @@ tqdm = "==4.64.0"
 django-jet-reboot = "*"
 google-api-python-client = "==1.4.1"
 wand = "*"
+sorl-thumbnail = "*"
 
 [dev-packages]
 
