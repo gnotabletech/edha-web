@@ -74,15 +74,15 @@ class BillsAndLaws(models.Model):
         return self.title
 
 
-@receiver(post_save, sender=BillsAndLaws)
-def update_thumbnail(sender, instance, **kwargs):
+#@receiver(post_save, sender=BillsAndLaws)
+#def update_thumbnail(sender, instance, **kwargs):
 #    """This post save function creates a thumbnail for the commentary PDF"""
-    temp = BillsAndLaws.objects.get(pk=instance.pk)
-    thumbnail = Image(temp.document)
-    thumbnail_converted = thumbnail.convert('jpg')
-    print(thumbnail_converted)
-    print(thumbnail_converted[0])
-    print(thumbnail_converted.sequence[0])
+#    temp = BillsAndLaws.objects.get(pk=instance.pk)
+#    thumbnail = Image(temp.document)
+#    thumbnail_converted = thumbnail.convert('jpg')
+#    print(thumbnail_converted)
+#    print(thumbnail_converted[0])
+#    print(thumbnail_converted.sequence[0])
     #temp.update(document_thumbnail= thumbnail[0])
 #    pdf = request.FILES
 #    document_thumbnail = Image(filename=request.FILES)
