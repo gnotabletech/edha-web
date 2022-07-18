@@ -2,6 +2,7 @@
 {% load static %}
 {% load underslash %}
 {% load mathfilters %}
+{% load thumbnail %}
 <html lang="en">
  
 <head>
@@ -160,9 +161,10 @@
                         <div class="card-body bg-white mb-3 fadeIn col-sm">
                             <div class="row g-4">
                                 <div class="col-sm-1 fadeIn rounded">
-                                    <embed src="{{ law.document.url }}" type="application/pdf" height="100%" width="150px" style="overflow:hidden" view="FitH">
+                                    <img src="{{ law.document_thumbnail.url }}" height="100%" width="auto">
                                 </div>
                                 <div class="col-sm shadow-sm rounded bg-white">
+
                                     <a href="{{ law.document.url }}" class="underlineHover list-group-item list-group-item-success bg-white row">
                                         <h4 class="card-title rounded bg-outline-success">{{ law.short_title }}</h4>
                                         <h6 class="card-title">{{ law.title }}</h6>
